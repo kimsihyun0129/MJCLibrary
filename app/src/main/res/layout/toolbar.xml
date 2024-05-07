@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_color"
+    android:id="@+id/toolbar">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/personIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/person"
+            android:background="@android:color/transparent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/logoImage_toolbar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_mjc_toolbar"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:clickable="true"
+            android:onClick="onLogoButtonClick"/>
+
+        <TextView
+            android:id="@+id/tv_mjc_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/yoon_gothic"
+            android:text="명지전문대학"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/logoImage_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/logoImage_toolbar"
+            app:layout_constraintBottom_toTopOf="@+id/tv_library_toolbar"
+            app:layout_constraintRight_toRightOf="parent"
+            android:clickable="true"
+            android:onClick="onLogoButtonClick"/>
+
+        <TextView
+            android:id="@+id/tv_library_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pt_serif_bold"
+            android:text="LIBRARY"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mjc_toolbar"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_mjc_toolbar"
+            app:layout_constraintRight_toRightOf="@+id/tv_mjc_toolbar"
+            app:layout_constraintBottom_toBottomOf="@+id/logoImage_toolbar"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:clickable="true"
+            android:onClick="onLogoButtonClick"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.appcompat.widget.Toolbar>

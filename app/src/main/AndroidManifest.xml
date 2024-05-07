@@ -13,11 +13,9 @@
         android:theme="@style/Theme.MJCLibrary"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".SplashActivity"
+            android:name=".StudyRoomReservationActivity" android:label="스터디룸 예약 액티비티"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +23,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true"/>
+            android:name=".LoginActivity" android:label="로그인 액티비티"/>
+        <activity
+            android:name=".SplashActivity" android:label="스플래쉬 액티비티"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".MainActivity" />
     </application>
 
 </manifest>
