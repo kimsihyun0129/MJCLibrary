@@ -20,7 +20,7 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
 
     ImageButton ibBack,ibSelectDate;//뒤로가기 버튼, 날짜선택버튼
     TextView tvSelectDate;//날짜선택 텍스트뷰
-    ListView lvStudyRoom;//리스트뷰
+    ListView rvStudyRoom;//리사이클러뷰
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//날짜 형식 지정
     String dateItems[] = new String[7];
@@ -35,7 +35,7 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
         ibBack = findViewById(R.id.ibBack);
         ibSelectDate = findViewById(R.id.ibSelectDate);
         tvSelectDate = findViewById(R.id.tvSelectDate);
-        lvStudyRoom = findViewById(R.id.lvStudyRoom);
+        rvStudyRoom = findViewById(R.id.rvStudyRoom);
 
         tvSelectDate.setText(sdf.format(calendar.getTime()));
 
@@ -46,11 +46,13 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
     }
 
 
-    public void onSelectDateButtonClick(View v) {
+    public void onSelectDateButtonClick(View v) { //예약날짜나 드롭다운아이콘 버튼 클릭했을 경우
+        //다이얼로그 생성
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setSingleChoiceItems(dateItems, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                tvSelectDate.setText(dateItems[which]);//희망 날짜를 선택한 날짜로 변경
                 dialog.dismiss();
             }
         });
