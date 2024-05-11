@@ -24,7 +24,7 @@
         android:layout_height="20dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="125dp"
-        android:background="#2196F3"
+        android:background="@color/available"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
         android:id="@+id/vUnavailable"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:background="#D1D1D1"
+        android:background="@color/unAvailable"
         app:layout_constraintBottom_toBottomOf="@+id/tvAvailable"
         app:layout_constraintLeft_toRightOf="@+id/tvAvailable"
         app:layout_constraintTop_toTopOf="@+id/tvAvailable" />
@@ -63,7 +63,7 @@
         android:id="@+id/vReserved"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:background="#404040"
+        android:background="@color/reserved"
         app:layout_constraintBottom_toBottomOf="@+id/tvUnavailable"
         app:layout_constraintLeft_toRightOf="@+id/tvUnavailable"
         app:layout_constraintTop_toTopOf="@+id/tvUnavailable" />

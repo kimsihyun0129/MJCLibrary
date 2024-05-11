@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#8AD8FB</color>
     <color name="gray">#C8C8C8</color>
+    <color name="available">#2196F3</color>
+    <color name="unAvailable">#D1D1D1</color>
+    <color name="reserved">#404040</color>
+    <color name="selected">#FF9800</color>
 </resources>
