@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudyRoomReservationDetailsActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스터디룸 이름"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+
+        <View
+            android:id="@+id/vAvailable"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/available"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAvailable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 예약가능 "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/vAvailable"
+            app:layout_constraintLeft_toRightOf="@+id/vAvailable"
+            app:layout_constraintTop_toTopOf="@+id/vAvailable" />
+
+        <View
+            android:id="@+id/vUnavailable"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:background="@color/unAvailable"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAvailable"
+            app:layout_constraintLeft_toRightOf="@+id/tvAvailable"
+            app:layout_constraintTop_toTopOf="@+id/tvAvailable" />
+
+        <TextView
+            android:id="@+id/tvUnavailable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 사용불가 "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/vUnavailable"
+            app:layout_constraintLeft_toRightOf="@+id/vUnavailable"
+            app:layout_constraintTop_toTopOf="@+id/vUnavailable" />
+
+        <View
+            android:id="@+id/vReserved"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:background="@color/reserved"
+            app:layout_constraintBottom_toBottomOf="@+id/tvUnavailable"
+            app:layout_constraintLeft_toRightOf="@+id/tvUnavailable"
+            app:layout_constraintTop_toTopOf="@+id/tvUnavailable" />
+
+        <TextView
+            android:id="@+id/tvReserved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 예약중 "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/vReserved"
+            app:layout_constraintLeft_toRightOf="@+id/vReserved"
+            app:layout_constraintTop_toTopOf="@+id/vReserved" />
+
+        <View
+            android:id="@+id/vSelected"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:background="@color/selected"
+            app:layout_constraintBottom_toBottomOf="@+id/tvReserved"
+            app:layout_constraintLeft_toRightOf="@+id/tvReserved"
+            app:layout_constraintTop_toTopOf="@+id/tvReserved" />
+
+        <TextView
+            android:id="@+id/tvSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 선택 "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/vSelected"
+            app:layout_constraintLeft_toRightOf="@+id/vSelected"
+            app:layout_constraintTop_toTopOf="@+id/vSelected" />
+
+        <View
+            android:id="@+id/v9"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/v10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v10"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v9"
+            app:layout_constraintLeft_toRightOf="@+id/v9"
+            app:layout_constraintTop_toTopOf="@+id/v9" />
+
+        <View
+            android:id="@+id/v11"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v10"
+            app:layout_constraintLeft_toRightOf="@+id/v10"
+            app:layout_constraintTop_toTopOf="@+id/v10" />
+
+        <View
+            android:id="@+id/v12"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v11"
+            app:layout_constraintLeft_toRightOf="@+id/v11"
+            app:layout_constraintTop_toTopOf="@+id/v11" />
+
+        <View
+            android:id="@+id/v13"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v12"
+            app:layout_constraintLeft_toRightOf="@+id/v12"
+            app:layout_constraintTop_toTopOf="@+id/v12" />
+
+        <View
+            android:id="@+id/v14"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v13"
+            app:layout_constraintLeft_toRightOf="@+id/v13"
+            app:layout_constraintTop_toTopOf="@+id/v13" />
+
+        <View
+            android:id="@+id/v15"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v14"
+            app:layout_constraintLeft_toRightOf="@+id/v14"
+            app:layout_constraintTop_toTopOf="@+id/v14" />
+
+        <View
+            android:id="@+id/v16"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/available"
+            app:layout_constraintLeft_toLeftOf="@+id/v9"
+            app:layout_constraintRight_toRightOf="@+id/v9"
+            app:layout_constraintTop_toBottomOf="@+id/v9" />
+
+        <View
+            android:id="@+id/v17"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v16"
+            app:layout_constraintLeft_toRightOf="@+id/v16"
+            app:layout_constraintTop_toTopOf="@+id/v16" />
+
+        <View
+            android:id="@+id/v18"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v17"
+            app:layout_constraintLeft_toRightOf="@+id/v17"
+            app:layout_constraintTop_toTopOf="@+id/v17" />
+
+        <View
+            android:id="@+id/v19"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v18"
+            app:layout_constraintLeft_toRightOf="@+id/v18"
+            app:layout_constraintTop_toTopOf="@+id/v18" />
+
+        <View
+            android:id="@+id/v20"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v19"
+            app:layout_constraintLeft_toRightOf="@+id/v19"
+            app:layout_constraintTop_toTopOf="@+id/v19" />
+
+        <View
+            android:id="@+id/v21"
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/available"
+            app:layout_constraintBottom_toBottomOf="@+id/v20"
+            app:layout_constraintLeft_toRightOf="@+id/v20"
+            app:layout_constraintTop_toTopOf="@+id/v20" />
+
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="60dp"
+            android:text="9"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="10"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv9"
+            app:layout_constraintLeft_toRightOf="@+id/tv9"
+            app:layout_constraintTop_toTopOf="@+id/tv9" />
+
+        <TextView
+            android:id="@+id/tv11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="11"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv10"
+            app:layout_constraintLeft_toRightOf="@+id/tv10"
+            app:layout_constraintTop_toTopOf="@+id/tv10" />
+
+        <TextView
+            android:id="@+id/tv12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="12"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv11"
+            app:layout_constraintLeft_toRightOf="@+id/tv11"
+            app:layout_constraintTop_toTopOf="@+id/tv11" />
+
+        <TextView
+            android:id="@+id/tv13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="13"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv12"
+            app:layout_constraintLeft_toRightOf="@+id/tv12"
+            app:layout_constraintTop_toTopOf="@+id/tv12" />
+
+        <TextView
+            android:id="@+id/tv14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="14"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv13"
+            app:layout_constraintLeft_toRightOf="@+id/tv13"
+            app:layout_constraintTop_toTopOf="@+id/tv13" />
+
+        <TextView
+            android:id="@+id/tv15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="15"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv14"
+            app:layout_constraintLeft_toRightOf="@+id/tv14"
+            app:layout_constraintTop_toTopOf="@+id/tv14" />
+
+        <TextView
+            android:id="@+id/tv16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv15"
+            app:layout_constraintLeft_toRightOf="@+id/tv15"
+            app:layout_constraintTop_toTopOf="@+id/tv15" />
+
+        <TextView
+            android:id="@+id/tv17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="17"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/tv10"
+            app:layout_constraintRight_toRightOf="@+id/tv10"
+            app:layout_constraintTop_toBottomOf="@+id/tv10" />
+
+        <TextView
+            android:id="@+id/tv18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv17"
+            app:layout_constraintLeft_toRightOf="@+id/tv17"
+            app:layout_constraintTop_toTopOf="@+id/tv17" />
+
+        <TextView
+            android:id="@+id/tv19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="19"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv18"
+            app:layout_constraintLeft_toRightOf="@+id/tv18"
+            app:layout_constraintTop_toTopOf="@+id/tv18" />
+
+        <TextView
+            android:id="@+id/tv20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="20"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv19"
+            app:layout_constraintLeft_toRightOf="@+id/tv19"
+            app:layout_constraintTop_toTopOf="@+id/tv19" />
+
+        <TextView
+            android:id="@+id/tv21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="21"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv20"
+            app:layout_constraintLeft_toRightOf="@+id/tv20"
+            app:layout_constraintTop_toTopOf="@+id/tv20" />
+
+        <TextView
+            android:id="@+id/tv22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="22"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv21"
+            app:layout_constraintLeft_toRightOf="@+id/tv21"
+            app:layout_constraintTop_toTopOf="@+id/tv21" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약희망일자"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvSelectDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024-05-07"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ibSelectDate"
+            app:layout_constraintRight_toLeftOf="@id/ibSelectDate"
+            app:layout_constraintTop_toTopOf="@+id/ibSelectDate"
+            android:onClick="onSelectDateButtonClick"/>
+
+        <ImageButton
+            android:id="@+id/ibSelectDate"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/down"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/black"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약시작시간"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvSeletStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024-05-07"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ibSelectStartTime"
+            app:layout_constraintRight_toLeftOf="@id/ibSelectStartTime"
+            app:layout_constraintTop_toTopOf="@+id/ibSelectStartTime"
+            android:onClick="onSelectDateButtonClick"/>
+
+        <ImageButton
+            android:id="@+id/ibSelectStartTime"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/down"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약종료시간"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvSelectEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024-05-07"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ibSelectEndTime"
+            app:layout_constraintRight_toLeftOf="@id/ibSelectEndTime"
+            app:layout_constraintTop_toTopOf="@+id/ibSelectEndTime"
+            android:onClick="onSelectDateButtonClick"/>
+
+        <ImageButton
+            android:id="@+id/ibSelectEndTime"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/down"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="용도"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvUse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024-05-07"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ibUse"
+            app:layout_constraintRight_toLeftOf="@id/ibUse"
+            app:layout_constraintTop_toTopOf="@+id/ibUse"
+            android:onClick="onSelectDateButtonClick"/>
+
+        <ImageButton
+            android:id="@+id/ibUse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/down"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동반이용자 : 0명"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추가"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/gray"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개인정보사용동의"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="10dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아니요"/>
+        </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnReservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/available"
+        android:text="예약" />
+
+</LinearLayout>
