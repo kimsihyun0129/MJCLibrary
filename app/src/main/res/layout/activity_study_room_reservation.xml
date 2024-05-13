@@ -12,18 +12,19 @@
         android:id="@+id/ibBack"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="100dp"
         android:background="@android:color/transparent"
         android:src="@drawable/back"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"/>
 
     <View
         android:id="@+id/vAvailable"
         android:layout_width="50dp"
         android:layout_height="20dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="115dp"
         android:background="@color/available"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +83,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="150dp"
         android:background="@color/black"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="165dp"
         android:text="예약희망일자"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -113,12 +114,13 @@
         android:id="@+id/ibSelectDate"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="155dp"
         android:background="@android:color/transparent"
         android:src="@drawable/down"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="onSelectDateButtonClick"/>
+        android:onClick="onSelectDateButtonClick"
+        tools:ignore="SpeakableTextPresentCheck"/>
 
     <View
         android:layout_width="match_parent"

@@ -13,7 +13,8 @@
         android:theme="@style/Theme.MJCLibrary"
         tools:targetApi="31">
         <activity
-            android:name=".StudyRoomReservationActivity" android:label="스터디룸 예약 액티비티"
+            android:name=".StudyRoomReservationActivity"
+            android:label="스터디룸 예약 액티비티"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
