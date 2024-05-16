@@ -11,14 +11,13 @@
     <include layout="@layout/toolbar"/>
 
     <Button
-        android:id="@+id/bookserch"
+        android:id="@+id/booksearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_stroke"
-        android:text="도서검색"
         android:layout_weight="1"
-
-        />
+        android:background="@drawable/btn_stroke"
+        android:drawableLeft="@drawable/search"
+        android:text="도서검색" />
 
     <Button
         android:id="@+id/studyroom"
@@ -27,6 +26,7 @@
         android:background="@drawable/btn_stroke"
         android:text="스더디룸 예약"
         android:layout_weight="1"
+        android:drawableLeft="@drawable/studyroom"
         />
 
 
