@@ -17,16 +17,23 @@
         android:layout_weight="1"
         android:background="@drawable/btn_stroke"
         android:drawableLeft="@drawable/search"
-        android:text="도서검색" />
+        android:text="도서검색"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:drawableRight="@drawable/baseline_arrow_forward_24"
+        />
 
     <Button
         android:id="@+id/studyroom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_stroke"
-        android:text="스더디룸 예약"
+        android:text="스터디룸 예약"
+        android:textSize="40dp"
+        android:textStyle="bold"
         android:layout_weight="1"
         android:drawableLeft="@drawable/studyroom"
+        android:drawableRight="@drawable/baseline_arrow_forward_24"
         />
 
 
