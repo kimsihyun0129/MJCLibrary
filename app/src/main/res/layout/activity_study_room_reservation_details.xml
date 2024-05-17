@@ -22,6 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <TextView
+            android:id="@+id/tvStudyRoomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="스터디룸 이름"
@@ -452,7 +453,8 @@
             android:src="@drawable/down"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck"
+            android:onClick="onDropDownImageButtonClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -495,7 +497,8 @@
             android:src="@drawable/down"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck"
+            android:onClick="onDropDownImageButtonClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -538,7 +541,8 @@
             android:src="@drawable/down"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck"
+            android:onClick="onDropDownImageButtonClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -581,7 +585,8 @@
             android:src="@drawable/down"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck"
+            android:onClick="onDropDownImageButtonClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -606,6 +611,7 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <Button
+            android:id="@+id/btnAddAccompanyingUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="추가"
@@ -641,6 +647,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <RadioGroup
+            android:id="@+id/rgAgree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -649,10 +656,12 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="10dp">
             <RadioButton
+                android:id="@+id/rbYes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="예"/>
             <RadioButton
+                android:id="@+id/rbNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="아니요"/>
