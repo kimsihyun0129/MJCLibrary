@@ -21,7 +21,7 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
 
     ImageButton ibBack,ibSelectDate,ibSelectStartTime,ibSelectEndTime,ibUse;
     Button btnAddAccompanyingUser, btnReservation;
-    TextView tvStudyRoomName;
+    TextView tvStudyRoomName, tvSelectDate, tvSelectStartTime, tvSelectEndTime, tvUse;
     int[] viewNames = {R.id.v9,R.id.v10,R.id.v11,R.id.v12,R.id.v13,R.id.v14,R.id.v15,R.id.v16,R.id.v17,R.id.v18,R.id.v19,R.id.v20,R.id.v21};
     View[] views = new View[viewNames.length];
     RadioGroup rgAgree;
@@ -41,6 +41,11 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         ibSelectDate = findViewById(R.id.ibSelectDate);
         ibSelectStartTime = findViewById(R.id.ibSelectStartTime);
         ibSelectEndTime = findViewById(R.id.ibSelectEndTime);
+        ibUse = findViewById(R.id.ibUse);
+        tvSelectDate = findViewById(R.id.tvSelectDate);
+        tvSelectStartTime = findViewById(R.id.tvSeletStartTime);
+        tvSelectEndTime = findViewById(R.id.tvSelectEndTime);
+        tvUse = findViewById(R.id.tvUse);
         btnAddAccompanyingUser = findViewById(R.id.btnAddAccompanyingUser);
         btnReservation = findViewById(R.id.btnReservation);
         tvStudyRoomName = findViewById(R.id.tvStudyRoomName);
@@ -67,21 +72,32 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tvStudyRoomName.setText(intent.getStringExtra("studyRoomName"));
+        tvSelectDate.setText(intent.getStringExtra("selectDate"));
     }
 
     public void onDropDownImageButtonClick(View v) {
         String[] items = null;
-        if(v.getId()==R.id.ibSelectDate) items = dateItems;
-        else if(v.getId()==R.id.ibSelectStartTime) items = startTimeItems;
-        else if(v.getId()==R.id.ibSelectEndTime) items = endTimeItems;
-        else if(v.getId()==R.id.ibUse) items = useItems;
-        Log.d("test", items[0]);
+        if(v.getId()==R.id.tvSelectDate||v.getId()==R.id.ibSelectDate) items = dateItems;
+        else if(v.getId()==R.id.tvSeletStartTime||v.getId()==R.id.ibSelectStartTime) items = startTimeItems;
+        else if(v.getId()==R.id.tvSelectEndTime||v.getId()==R.id.ibSelectEndTime) items = endTimeItems;
+        else if(v.getId()==R.id.tvUse||v.getId()==R.id.ibUse) items = useItems;
+
         //다이얼로그 생성
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        String[] finalItems = items;
         alertDialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                if(finalItems == dateItems) {
+                    tvSelectDate.setText(finalItems[which]);
+                } else if(finalItems ==startTimeItems) {
+                    tvSelectStartTime.setText(finalItems[which]);
+                } else if(finalItems == endTimeItems) {
+                    tvSelectEndTime.setText(finalItems[which]);
+                } else if (finalItems == useItems) {
+                    tvUse.setText(finalItems[which]);
+                }
+                dialog.dismiss();
             }
         });
         alertDialog.show();

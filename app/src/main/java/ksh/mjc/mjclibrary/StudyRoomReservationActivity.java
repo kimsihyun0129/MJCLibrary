@@ -24,7 +24,7 @@ import java.util.List;
 public class StudyRoomReservationActivity extends AppCompatActivity {
 
     ImageButton ibBack,ibSelectDate;//뒤로가기 버튼, 날짜선택버튼
-    TextView tvSelectDate;//날짜선택 텍스트뷰
+    public static TextView tvSelectDate;//날짜선택 텍스트뷰
     RecyclerView rvStudyRoom;//리사이클러뷰
     String[] studyRoomNames = {"창의학습공간 스터디룸1", "창의학습공간 스터디룸2", "창의학습공간 스터디룸3", "세미나룸", "스터디라운지 스터디룸1", "스터디라운지 스터디룸2", "스터디라운지 스터디룸3"};
     Calendar calendar = Calendar.getInstance();

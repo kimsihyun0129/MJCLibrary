@@ -56,6 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View v) {
                     Intent intent = new Intent(itemView.getContext(), StudyRoomReservationDetailsActivity.class);
                     intent.putExtra("studyRoomName",tvStudyRoomName.getText().toString());
+                    intent.putExtra("selectDate",StudyRoomReservationActivity.tvSelectDate.getText().toString());
                     context.startActivity(intent);
                 }
             });

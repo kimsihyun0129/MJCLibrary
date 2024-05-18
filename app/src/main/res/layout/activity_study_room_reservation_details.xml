@@ -438,12 +438,11 @@
             android:id="@+id/tvSelectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2024-05-07"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/ibSelectDate"
             app:layout_constraintRight_toLeftOf="@id/ibSelectDate"
             app:layout_constraintTop_toTopOf="@+id/ibSelectDate"
-            android:onClick="onSelectDateButtonClick"/>
+            android:onClick="onDropDownImageButtonClick"/>
 
         <ImageButton
             android:id="@+id/ibSelectDate"
@@ -482,12 +481,11 @@
             android:id="@+id/tvSeletStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2024-05-07"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/ibSelectStartTime"
             app:layout_constraintRight_toLeftOf="@id/ibSelectStartTime"
             app:layout_constraintTop_toTopOf="@+id/ibSelectStartTime"
-            android:onClick="onSelectDateButtonClick"/>
+            android:onClick="onDropDownImageButtonClick"/>
 
         <ImageButton
             android:id="@+id/ibSelectStartTime"
@@ -526,12 +524,11 @@
             android:id="@+id/tvSelectEndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2024-05-07"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/ibSelectEndTime"
             app:layout_constraintRight_toLeftOf="@id/ibSelectEndTime"
             app:layout_constraintTop_toTopOf="@+id/ibSelectEndTime"
-            android:onClick="onSelectDateButtonClick"/>
+            android:onClick="onDropDownImageButtonClick"/>
 
         <ImageButton
             android:id="@+id/ibSelectEndTime"
@@ -570,12 +567,11 @@
             android:id="@+id/tvUse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2024-05-07"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/ibUse"
             app:layout_constraintRight_toLeftOf="@id/ibUse"
             app:layout_constraintTop_toTopOf="@+id/ibUse"
-            android:onClick="onSelectDateButtonClick"/>
+            android:onClick="onDropDownImageButtonClick"/>
 
         <ImageButton
             android:id="@+id/ibUse"
