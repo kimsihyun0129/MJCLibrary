@@ -1,6 +1,7 @@
 package ksh.mjc.mjclibrary;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             for(int i=0;i<viewNames.length;i++){
                 views[i] = itemView.findViewById(viewNames[i]);
             }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), StudyRoomReservationDetailsActivity.class);
+                    intent.putExtra("studyRoomName",tvStudyRoomName.getText().toString());
+                    context.startActivity(intent);
+                }
+            });
         }
 
         public void bind(Item item) {

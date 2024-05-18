@@ -64,6 +64,9 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
             dateItems[i] = sdf.format(calendar.getTime());
             calendar.add(Calendar.DAY_OF_YEAR,1);
         }
+
+        Intent intent = getIntent();
+        tvStudyRoomName.setText(intent.getStringExtra("studyRoomName"));
     }
 
     public void onDropDownImageButtonClick(View v) {
