@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -73,6 +74,43 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tvStudyRoomName.setText(intent.getStringExtra("studyRoomName"));
         tvSelectDate.setText(intent.getStringExtra("selectDate"));
+
+        btnAddAccompanyingUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
+
+                // 커스텀 레이아웃을 인플레이트합니다.
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.activity_add_accompaying_user, null);
+                dialogBuilder.setView(dialogView);
+
+                // 대화상자를 생성하고 표시합니다.
+                AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.show();
+                alertDialog.getWindow().setLayout(1000, 1500);
+
+                // 커스텀 레이아웃 내의 btnClose 버튼에 대한 참조를 가져옵니다.
+                ImageButton btnClose = dialogView.findViewById(R.id.btnClose);
+                Button btnSave = dialogView.findViewById(R.id.btnSave);
+
+                // btnClose 버튼의 클릭 이벤트를 설정합니다.
+                btnClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // 대화상자를 닫습니다.
+                        alertDialog.dismiss();
+                    }
+                });
+
+                btnSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     public void onDropDownImageButtonClick(View v) {
