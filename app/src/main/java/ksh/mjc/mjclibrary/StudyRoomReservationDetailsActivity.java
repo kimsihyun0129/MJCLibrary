@@ -10,12 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
@@ -85,42 +88,54 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         //선택된 날짜 설정
         tvSelectDate.setText(intent.getStringExtra("selectDate"));
 
+        //동반이용자 추가 액티비티 인플레이팅
+        View activityAddAccompayingUser = getLayoutInflater().inflate(R.layout.activity_add_accompaying_user, null);
+        //동반이용자 추가 대화상자 만들기
+        AlertDialog.Builder dialogAddAccompanyingUser = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
+        dialogAddAccompanyingUser.setView(activityAddAccompayingUser);
+
+        btnAddAccompanyingUser.setOnClickListener(new View.OnClickListener() { //추가 버튼을 클릭하면
+            @Override
+            public void onClick(View v) {
+                //동반이용자 추가 대화상자를 띄워 줌.
+                dialogAddAccompanyingUser.show();
+            }
+        });
+
+        //동반이용자 추가 액티비티에 있는 뷰들 중 사용할 뷰들 인플레이팅
+        ImageButton btnClose = activityAddAccompayingUser.findViewById(R.id.btnClose);
+        EditText etName = activityAddAccompayingUser.findViewById(R.id.etName);
+        EditText etStudentNumber = activityAddAccompayingUser.findViewById(R.id.etStudentNumber);
+        Button btnAddAccompanyingUser = activityAddAccompayingUser.findViewById(R.id.btnAddAccompayingUser);
+        Button btnSave = activityAddAccompayingUser.findViewById(R.id.btnSave);
+        ListView lvAddAccompanyingUser = activityAddAccompayingUser.findViewById(R.id.lvAddList);
+        ListView lvRecentAccompayingUser = activityAddAccompayingUser.findViewById(R.id.lvRecentAccompanyingUser);
+
+        //추가한 동반이용자 목록 배열
+        ArrayList<ListViewItem> alAddAccompayingUser = new ArrayList<>();
+        //추가된 동반이용자 리스트뷰 어댑터
+        ListViewAdapter addAccompanyingUserAdapter = new ListViewAdapter(getApplicationContext(),R.layout.added_accompaying_user_item, alAddAccompayingUser);
+        //어댑터를 리스트뷰에 연결
+        lvAddAccompanyingUser.setAdapter(addAccompanyingUserAdapter);
+
         btnAddAccompanyingUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
-
-                // 커스텀 레이아웃을 인플레이트합니다.
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.activity_add_accompaying_user, null);
-                dialogBuilder.setView(dialogView);
-
-                // 대화상자를 생성하고 표시합니다.
-                AlertDialog alertDialog = dialogBuilder.create();
-                alertDialog.show();
-                alertDialog.getWindow().setLayout(1000, 1500);
-
-                // 커스텀 레이아웃 내의 btnClose 버튼에 대한 참조를 가져옵니다.
-                ImageButton btnClose = dialogView.findViewById(R.id.btnClose);
-                Button btnSave = dialogView.findViewById(R.id.btnSave);
-
-                // btnClose 버튼의 클릭 이벤트를 설정합니다.
-                btnClose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // 대화상자를 닫습니다.
-                        alertDialog.dismiss();
-                    }
-                });
-
-                btnSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
+                alAddAccompayingUser.add(new ListViewItem(etName.getText().toString(), Integer.parseInt(etStudentNumber.getText().toString())));
+                addAccompanyingUserAdapter.notifyDataSetChanged();
+                etName.setText("");
+                etStudentNumber.setText("");
             }
         });
+
+
+        //최근 동반이용자 목록 배열
+        ArrayList<ListViewItem> alRecentAccompayingUser = new ArrayList<>();
+        alRecentAccompayingUser.add(new ListViewItem("aa",1323));
+        //최근 동반 이용자 리스트뷰 어댑터
+        ListViewAdapter recentAccompanyingUserAdapter = new ListViewAdapter(getApplicationContext(),R.layout.recent_accompanying_user_item, alRecentAccompayingUser, alAddAccompayingUser, addAccompanyingUserAdapter);
+        //어댑터를 리스트뷰에 연결
+        lvRecentAccompayingUser.setAdapter(recentAccompanyingUserAdapter);
     }
 
     //드롭다운 버튼 클릭했을 때 실행시켜줄 메서드(xml에서 onClick속성 사용)
