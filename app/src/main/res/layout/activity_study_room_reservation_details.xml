@@ -619,6 +619,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tvAccompanyingUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="동반이용자 : 0명"

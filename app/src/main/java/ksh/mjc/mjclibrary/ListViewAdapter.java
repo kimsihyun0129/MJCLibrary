@@ -14,20 +14,20 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class ListViewAdapter extends ArrayAdapter<ListViewItem> {
+public class ListViewAdapter extends ArrayAdapter<Student> {
     int itemLayout;//생성자에서 받은 레이아웃을 저장할 변수
-    ArrayList<ListViewItem> alAddAccompayingUser, alRecentAccompayingUser;//추가 동반이용자 배열, 최근 동반이용자 배열
+    ArrayList<Student> alAddAccompayingUser, alRecentAccompayingUser;//추가 동반이용자 배열, 최근 동반이용자 배열
     ListViewAdapter addAccompanyingUserAdapter;//추가 동반이용자 리스트뷰에 달아준 어댑터를 저장할 변수
 
     //매개 변수가 3개인 생성자
-    public ListViewAdapter(@NonNull Context context, int itemLayout, ArrayList<ListViewItem> alAddAccompayingUser) {
+    public ListViewAdapter(@NonNull Context context, int itemLayout, ArrayList<Student> alAddAccompayingUser) {
         super(context, itemLayout, alAddAccompayingUser);
         this.alAddAccompayingUser = alAddAccompayingUser;
         this.itemLayout = itemLayout;
     }
 
     //매개 변수가 5개인 생성자(생성자 오버로딩) - 최근 동반이용자 목록에서 추가 동반이용자 목록으로 옮기기 위해 오버로딩함.
-    public ListViewAdapter(@NonNull Context context, int itemLayout, ArrayList<ListViewItem> alRecentAccompayingUser,ArrayList<ListViewItem> alAddAccompayingUser, ListViewAdapter addAccompanyingUserAdapter) {
+    public ListViewAdapter(@NonNull Context context, int itemLayout, ArrayList<Student> alRecentAccompayingUser, ArrayList<Student> alAddAccompayingUser, ListViewAdapter addAccompanyingUserAdapter) {
         super(context, itemLayout, alRecentAccompayingUser);
         this.alAddAccompayingUser = alAddAccompayingUser;
         this.alRecentAccompayingUser = alRecentAccompayingUser;
@@ -39,7 +39,7 @@ public class ListViewAdapter extends ArrayAdapter<ListViewItem> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // 현재 목록의 위치에 해당하는 ListViewItem 객체 가져오기
-        ListViewItem listViewItem = getItem(position);
+        Student listViewItem = getItem(position);
 
         // 성능 향상을 위해 재사용 가능한 뷰가 있는지 확인
         if (convertView == null) {
@@ -76,7 +76,7 @@ public class ListViewAdapter extends ArrayAdapter<ListViewItem> {
                 @Override
                 public void onClick(View v) {
                     //추가 동반이용자 목록에 삽입
-                    alAddAccompayingUser.add(new ListViewItem(tvName.getText().toString(),Integer.parseInt(tvStudentNumber.getText().toString())));
+                    alAddAccompayingUser.add(new Student(tvName.getText().toString(),Integer.parseInt(tvStudentNumber.getText().toString())));
                     //추가 동반이용자 리스트뷰 어댑터에 변경 사실을 알림
                     addAccompanyingUserAdapter.notifyDataSetChanged();
                     //최근 동반 이용자 목록에서 삭제
