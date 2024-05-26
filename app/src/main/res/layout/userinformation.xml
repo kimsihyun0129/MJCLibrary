@@ -25,6 +25,7 @@
         android:fitsSystemWindows="true"
         android:layout_gravity="left"
         app:menu="@menu/user_menu"
+        app:headerLayout="@layout/userheder"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>
