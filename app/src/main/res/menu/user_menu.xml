@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:checkable="false"
+            android:title="유저이름"/>
+        <item android:checkable="false"
+            android:title="유저학번"/>
+        <item android:checkable="false"
+            android:title="유저학과 학년 "/>
+
+        <item android:id="reservation"
+            android:title="예약현황"/>
+        <item android:id="log_out"
+            android:title="로그아웃"/>
+    </group>
+
+
+</menu>
