@@ -26,7 +26,6 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
     //TODO 1.db에서 스터디룸 이름 및 최소/최대 인원 가져오기
     String[] studyRoomNames = {"창의학습공간 스터디룸1", "창의학습공간 스터디룸2", "창의학습공간 스터디룸3", "세미나룸", "스터디라운지 스터디룸1", "스터디라운지 스터디룸2", "스터디라운지 스터디룸3"};
     int[] studyRoomMinNumberOfPeoples = {3,3,3,7,3,3,3}, studyroomMaxNumberOfPeoples={6,6,6,20,6,6,6};//스터디룸 최소/최대 인원
-    //TODO 2.밑에다가 넣어도 되는지 확인하기
     Calendar calendar = Calendar.getInstance();//현재 날짜를 불러오기 위한 캘린더 객체 생성
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//날짜 형식 지정
     String dateItems[] = new String[7];//날짜 선택 옵션 배열

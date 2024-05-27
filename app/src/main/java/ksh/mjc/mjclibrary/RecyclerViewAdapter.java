@@ -77,6 +77,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     //인텐트를 사용하여 스터디룸 예약 상세 화면으로 이동(스터디룸 이름과 날짜를 함께 넘김)
                     Intent intent = new Intent(itemView.getContext(), StudyRoomReservationDetailsActivity.class);
                     intent.putExtra("studyRoomName",tvStudyRoomName.getText().toString());
+                    intent.putExtra("minNumberOfPeople",alStudyRoom.get(getAdapterPosition()).minNumberOfPeople);
+                    intent.putExtra("maxNumberOfPeople",alStudyRoom.get(getAdapterPosition()).maxNumberOfPeople);
                     intent.putExtra("selectDate",StudyRoomReservationActivity.tvSelectDate.getText().toString());
                     context.startActivity(intent);
                 }
