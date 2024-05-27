@@ -2,6 +2,7 @@ package ksh.mjc.mjclibrary;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,17 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> { //리사이클러뷰 어댑터를 상속받은 클래스
     private Context context;
     ArrayList<StudyRoom> alStudyRoom;
+    String selectedDate = "";//선택된 날짜
 
     public RecyclerViewAdapter(Context context, ArrayList<StudyRoom> alStudyRoom) {
         this.context = context;
         this.alStudyRoom = alStudyRoom;
+    }
+
+    public void updateSelectedDate(String newDate) {
+        this.selectedDate = newDate;
+        notifyDataSetChanged();
+        Log.d("ttt",newDate);
     }
 
     @NonNull
@@ -39,6 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         StudyRoom studyRoom = alStudyRoom.get(position);
         //데이터와 뷰를 결합
         holder.bind(studyRoom);
+        holder.timeLineColorChange(studyRoom, selectedDate);
     }
 
     @Override
@@ -49,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvStudyRoomName;//스터디룸 이름을 표시할 텍스트뷰
-        int[] timelineNames = {R.id.v9,R.id.v10,R.id.v11,R.id.tv12,R.id.tv13,R.id.tv14,R.id.tv15,R.id.tv16,R.id.tv17,R.id.tv18,R.id.v19,R.id.tv20,R.id.v21};//시간 막대의 ID를 저장한 배열
+        int[] timelineNames = {R.id.v9,R.id.v10,R.id.v11,R.id.v12,R.id.v13,R.id.v14,R.id.v15,R.id.v16,R.id.v17,R.id.v18,R.id.v19,R.id.v20,R.id.v21};//시간 막대의 ID를 저장한 배열
         View[] timelines = new View[timelineNames.length];//시간 막대 배열
         //생성자
         public ViewHolder(@NonNull View itemView) {
@@ -77,6 +86,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void bind(StudyRoom studyRoom) {
             //스터디룸 이름 텍스트 뷰를 각각의 스터디룸 이름에 맞게 바꿔줌
             tvStudyRoomName.setText(studyRoom.studyRoomName);
+        }
+
+        public void timeLineColorChange(StudyRoom studyRoom, String selectedDate) {
+            for(int i=0; i<timelines.length; i++) { //시간 막대 색을 초기화
+                timelines[i].setBackgroundColor(context.getResources().getColor(R.color.available));
+            }
+
+            //TODO DB에서 해당 스터디룸 이름과 해당 날짜에 대한 예약시작시간과 예약종료시간을 가져와서 각각의 ArrayList에 넣어줌.
+            ArrayList<Integer> startTime = new ArrayList<>(); //DB에서 가져온 예약시작시간들을 담을 배열
+            startTime.add(10);
+            startTime.add(11);
+            startTime.add(12);
+            startTime.add(15);
+            startTime.add(18);
+            ArrayList<Integer> endTime = new ArrayList<>();//DB에서 가져온 예약종료시간들을 담을 배열
+            endTime.add(11);
+            endTime.add(12);
+            endTime.add(14);
+            endTime.add(16);
+            endTime.add(19);
+
+            if(selectedDate.equals("2024-05-27")) { //DB연동을 한다면 if문 안만 실행
+                //예약된 시간의 시간 막대 색을 변경
+                for(int i=0;i<startTime.toArray().length;i++) {
+                    timelines[startTime.get(i)-9].setBackgroundColor(context.getResources().getColor(R.color.reserved));
+                    timelines[endTime.get(i)-10].setBackgroundColor(context.getResources().getColor(R.color.reserved));
+                }
+            }
         }
     }
 }
