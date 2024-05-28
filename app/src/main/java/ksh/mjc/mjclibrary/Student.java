@@ -1,6 +1,6 @@
 package ksh.mjc.mjclibrary;
 
-public class Student { //힉생 클래스
+public class Student { //학생 클래스
     private String name; //이름 저장할 문자열 변수
     private int studentNumber;//학번 저장할 문자열 변수
 

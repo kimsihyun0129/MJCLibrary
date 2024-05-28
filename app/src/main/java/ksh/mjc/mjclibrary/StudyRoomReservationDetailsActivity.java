@@ -1,11 +1,12 @@
 package ksh.mjc.mjclibrary;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +15,16 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
@@ -36,6 +43,8 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
     String startTimeItems[] = {"09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"};//시작시간 선택 옵션 문자열 배열
     String endTimeItems[] = {"10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00"};//종료시간 선택 옵션 문자열 배열
     String useItems[] = {"스터디","모임/회의","기타"};//용도 선택 옵션 문자열 배열
+    String studyRoomName;
+    int minNumberOfPeople, maxNumberOfPeople;//선택된 스터디룸의 최소인원과 최대인원
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,9 +94,14 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         //인텐트로 전 액티비티에서 넘겨준 데이터 받기
         Intent intent = getIntent();
         //스터디룸 이름 설정
-        tvStudyRoomName.setText(intent.getStringExtra("studyRoomName"));
+        studyRoomName = intent.getStringExtra("studyRoomName");
+        tvStudyRoomName.setText(studyRoomName);
+        minNumberOfPeople = intent.getIntExtra("minNumberOfPeople",2);
+        maxNumberOfPeople = intent.getIntExtra("maxNumberOfPeople",0);
         //선택된 날짜 설정
         tvSelectDate.setText(intent.getStringExtra("selectDate"));
+        //선택된 날짜를 고려하여 시간 막대 색을 변경하는 메소드 호출
+        timeLineColorChange(tvSelectDate.getText().toString());
 
         //동반이용자 추가 액티비티 인플레이팅
         View activityAddAccompayingUser = getLayoutInflater().inflate(R.layout.activity_add_accompaying_user, null);
@@ -145,6 +159,7 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
             }
         });
 
+        //TODO DB에서 로그인 한 학생의 동반이용자 목록 가져오기
         //최근 동반이용자 목록 배열
         ArrayList<Student> alRecentAccompayingUser = new ArrayList<>();
         alRecentAccompayingUser.add(new Student("aa",1323));
@@ -172,14 +187,14 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                 if(tvSelectStartTime.getText().toString().equals("") //시작시간을 선택하지 않았거나
                         ||tvSelectEndTime.getText().toString().equals("") //종료시간을 선택하지 않았거나
                         ||tvUse.getText().toString().equals("") //용도를 선택하지 않았거나
-                        ||theNumberOfAccompanyingUsers+1<3||theNumberOfAccompanyingUsers+1>6 //제한 인원을 맞추지 못했거나
+                        ||theNumberOfAccompanyingUsers+1<minNumberOfPeople||theNumberOfAccompanyingUsers+1>maxNumberOfPeople //제한 인원을 맞추지 못했거나
                         ||rgAgree.getCheckedRadioButtonId()!=R.id.rbYes) { //개인정보사용동의를 하지 않았을 경우
                     //각각에 대한 알림 메시지를 다르게하여 대화상자 출력
                     String message = "";
                     if(tvSelectStartTime.getText().toString().equals("")) message="예약시작시간이 선택되지 않았습니다.";
                     else if(tvSelectEndTime.getText().toString().equals("")) message="예약종료시간이 선택되지 않았습니다.";
                     else if(tvUse.getText().toString().equals("")) message="용도가 선택되지 않았습니다.";
-                    else if(theNumberOfAccompanyingUsers+1<3||theNumberOfAccompanyingUsers+1>6) message="제한 인원이 충족되지 않았습니다.";
+                    else if(theNumberOfAccompanyingUsers+1<minNumberOfPeople||theNumberOfAccompanyingUsers+1>maxNumberOfPeople) message="제한 인원이 충족되지 않았습니다.";
                     else if(rgAgree.getCheckedRadioButtonId()!=R.id.rbYes) message="개인정보사용동의를 하지 않았습니다.";
                     AlertDialog.Builder dialog = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
                     dialog.setMessage(message);
@@ -201,6 +216,33 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void timeLineColorChange(String date) {
+        for(int i=0; i<timelines.length; i++) { //시간 막대 색을 초기화
+            timelines[i].setBackgroundColor(getResources().getColor(R.color.available));
+        }
+        //TODO DB에서 해당 스터디룸 이름과 해당 날짜에 대한 예약시작시간과 예약종료시간을 가져와서 각각의 ArrayList에 넣어줌.
+        ArrayList<Integer> startTime = new ArrayList<>(); //DB에서 가져온 예약시작시간들을 담을 배열
+        startTime.add(10);
+        startTime.add(11);
+        startTime.add(12);
+        startTime.add(15);
+        startTime.add(18);
+        ArrayList<Integer> endTime = new ArrayList<>();//DB에서 가져온 예약종료시간들을 담을 배열
+        endTime.add(11);
+        endTime.add(12);
+        endTime.add(14);
+        endTime.add(16);
+        endTime.add(19);
+
+        if(date.equals("2024-05-26")) { //DB연동을 한다면 if문 안만 실행
+            //예약된 시간의 시간 막대 색을 변경
+            for(int i=0;i<startTime.toArray().length;i++) {
+                timelines[startTime.get(i)-9].setBackgroundColor(getResources().getColor(R.color.reserved));
+                timelines[endTime.get(i)-10].setBackgroundColor(getResources().getColor(R.color.reserved));
+            }
+        }
     }
 
     //리스너에 안전하게 전달하기 위해 final 사용
@@ -230,14 +272,25 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         alertDialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // 선택된 목록에 따라 텍스트 뷰에 해당 값 설정
-                if (finalItems == dateItems) {
-                    tvSelectDate.setText(finalItems[which]);
-                } else if (finalItems == startTimeItems) {
-                    startTime.set(Integer.parseInt(finalItems[which].substring(0, 2)));
-                    tvSelectStartTime.setText(finalItems[which]);
-                } else if (finalItems == endTimeItems) {
-                    endTime.set(Integer.parseInt(finalItems[which].substring(0, 2)));
+                if (finalItems == dateItems) { //날짜 선택 옵션 중에 선택하였으면
+                    tvSelectDate.setText(finalItems[which]); //선택된 날짜로 텍스트뷰 변경
+                    timeLineColorChange(finalItems[which]);//선택된 날짜를 고려하여 시간 막대 색을 변경하는 메소드 호출
+                    //예약시작시간과 예약종료시간을 다시 입력받기 위해 비워줌
+                    tvSelectStartTime.setText("");
+                    tvSelectEndTime.setText("");
+                } else if (finalItems == startTimeItems) { //예약시작시간 선택 옵션 중에 선택하였으면
+                    startTime.set(Integer.parseInt(finalItems[which].substring(0, 2)));//아래에서 예외처리를 해주기 위해 시작시간을 저장
+                    if(((ColorDrawable)timelines[startTime.get() - 9].getBackground()).getColor()!=getResources().getColor(R.color.available)) { //이미 예약이 되었다면
+                        //대화상자를 띄워줌
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
+                        alertDialog.setMessage("이미 예약된 시간입니다.");
+                        alertDialog.setPositiveButton("확인",null);
+                        alertDialog.show();
+                    } else { //제대로 선택 되었다면
+                        tvSelectStartTime.setText(finalItems[which]);//선택된 시간으로 텍스트뷰 변경
+                    }
+                } else if (finalItems == endTimeItems) {//예약종료시간 선택 옵션 중에 선택하였으면
+                    endTime.set(Integer.parseInt(finalItems[which].substring(0, 2)));//아래에서 예외처리를 해주기 위해 종료시간을 저장
                     if (endTime.get() - startTime.get() < 1) { //종료시간이 잘못 선택되었다면
                         //대화상자를 띄워줌
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
@@ -250,7 +303,19 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                         alertDialog.setMessage("예약 시간은 최대 2시간입니다.");
                         alertDialog.setPositiveButton("확인",null);
                         alertDialog.show();
+                    } else if(((ColorDrawable)timelines[endTime.get() - 10].getBackground()).getColor()==getResources().getColor(R.color.unAvailable)
+                            ||((ColorDrawable)timelines[endTime.get() - 10].getBackground()).getColor()==getResources().getColor(R.color.reserved)) {//이미 예약된 시간이라면
+                        //대화상자를 띄워줌
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(StudyRoomReservationDetailsActivity.this);
+                        alertDialog.setMessage("이미 예약된 시간입니다.");
+                        alertDialog.setPositiveButton("확인",null);
+                        alertDialog.show();
                     } else { //예약시간을 제대로 선택했다면
+                        //해당 날짜의 예약 정보를 기준으로 시간 막대 초기화
+                        timeLineColorChange(finalItems[which]);
+                        //시간 막대를 선택 색으로 변경
+                        timelines[startTime.get()-9].setBackgroundColor(getResources().getColor(R.color.selected));
+                        timelines[endTime.get()-10].setBackgroundColor(getResources().getColor(R.color.selected));
                         //예약종료시간 텍스트뷰 설정
                         tvSelectEndTime.setText(finalItems[which]);
                     }

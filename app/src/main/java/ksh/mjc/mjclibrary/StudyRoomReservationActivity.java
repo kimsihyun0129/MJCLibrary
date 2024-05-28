@@ -22,10 +22,10 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
     ImageButton ibBack,ibSelectDate;//뒤로가기 버튼, 날짜선택버튼
     static TextView tvSelectDate;//날짜 선택 텍스트뷰
     RecyclerView rvStudyRoom;//스터디룸 정보를 띄워줄 리사이클러뷰
+    RecyclerViewAdapter studyRoomAdapter;//리사이클러뷰 선언
     //TODO 1.db에서 스터디룸 이름 및 최소/최대 인원 가져오기
     String[] studyRoomNames = {"창의학습공간 스터디룸1", "창의학습공간 스터디룸2", "창의학습공간 스터디룸3", "세미나룸", "스터디라운지 스터디룸1", "스터디라운지 스터디룸2", "스터디라운지 스터디룸3"};
     int[] studyRoomMinNumberOfPeoples = {3,3,3,7,3,3,3}, studyroomMaxNumberOfPeoples={6,6,6,20,6,6,6};//스터디룸 최소/최대 인원
-    //TODO 2.밑에다가 넣어도 되는지 확인하기
     Calendar calendar = Calendar.getInstance();//현재 날짜를 불러오기 위한 캘린더 객체 생성
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//날짜 형식 지정
     String dateItems[] = new String[7];//날짜 선택 옵션 배열
@@ -72,11 +72,14 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
         }
 
         //리사이클러뷰(스터디룸 목록) 어댑터 생성
-        RecyclerViewAdapter studyRoomAdapter = new RecyclerViewAdapter(this,alStudyRoom);
+        studyRoomAdapter = new RecyclerViewAdapter(this,alStudyRoom);
+        //각각의 시간막대를 업데이트 해주는 메서드 호출
+        studyRoomAdapter.updateSelectedDate(tvSelectDate.getText().toString());
         //리사이클러뷰를 어떻게 표시할 것인지 생성(리니어레이아웃)
         rvStudyRoom.setLayoutManager(new LinearLayoutManager(this));
         //리사이클러뷰에 어댑터 연결
         rvStudyRoom.setAdapter(studyRoomAdapter);
+
     }
 
     public void onSelectDateButtonClick(View v) { //예약날짜나 드롭다운아이콘 버튼 클릭했을 경우
@@ -86,6 +89,7 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 tvSelectDate.setText(dateItems[which]);//희망 날짜를 선택한 날짜로 변경
+                studyRoomAdapter.updateSelectedDate(dateItems[which]);//어댑터에 새로운 날짜 전달
                 dialog.dismiss();
             }
         });

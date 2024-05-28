@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 
 public class ListViewAdapter extends ArrayAdapter<Student> {
+    Context context;
     int itemLayout;//생성자에서 받은 레이아웃을 저장할 변수
     ArrayList<Student> alAddAccompayingUser, alRecentAccompayingUser;//추가 동반이용자 배열, 최근 동반이용자 배열
     ListViewAdapter addAccompanyingUserAdapter;//추가 동반이용자 리스트뷰에 달아준 어댑터를 저장할 변수
@@ -22,6 +24,7 @@ public class ListViewAdapter extends ArrayAdapter<Student> {
     //매개 변수가 3개인 생성자
     public ListViewAdapter(@NonNull Context context, int itemLayout, ArrayList<Student> alAddAccompayingUser) {
         super(context, itemLayout, alAddAccompayingUser);
+        this.context = context;
         this.alAddAccompayingUser = alAddAccompayingUser;
         this.itemLayout = itemLayout;
     }
@@ -29,6 +32,7 @@ public class ListViewAdapter extends ArrayAdapter<Student> {
     //매개 변수가 5개인 생성자(생성자 오버로딩) - 최근 동반이용자 목록에서 추가 동반이용자 목록으로 옮기기 위해 오버로딩함.
     public ListViewAdapter(@NonNull Context context, int itemLayout, ArrayList<Student> alRecentAccompayingUser, ArrayList<Student> alAddAccompayingUser, ListViewAdapter addAccompanyingUserAdapter) {
         super(context, itemLayout, alRecentAccompayingUser);
+        this.context = context;
         this.alAddAccompayingUser = alAddAccompayingUser;
         this.alRecentAccompayingUser = alRecentAccompayingUser;
         this.addAccompanyingUserAdapter = addAccompanyingUserAdapter;
