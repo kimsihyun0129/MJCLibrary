@@ -15,7 +15,7 @@
 
         <include layout="@layout/toolbar"/>
         <Button
-            android:id="@+id/booksearch"
+            android:id="@+id/btnBookResearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
             />
 
         <Button
-            android:id="@+id/studyroom"
+            android:id="@+id/btnStudyRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_stroke"

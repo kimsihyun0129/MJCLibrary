@@ -2,6 +2,7 @@ package ksh.mjc.mjclibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,10 +12,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private int studentNumber, password;//학번과 비밀번호를 저장할 변수
     EditText etStudentNumber,etPassword; //학번/비밀번호 입력란
     TextView tvIdHint,tvPasswordHint;//힌트나 오류메시지를 띄워줄 텍스트뷰
 
@@ -102,9 +109,32 @@ public class LoginActivity extends AppCompatActivity {
                 tvIdHint.setText("");
                 tvPasswordHint.setText("");
 
-                // 숫자로 변환
-                final int studentNumber = Integer.parseInt(studentNumberStr);
-                final int password = Integer.parseInt(passwordStr);
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            Log.d("ttt",String.valueOf(success));
+
+                            if(success) { //학번과 비밀번호 인증이 성공이면
+                                //학번과 이름 저장
+                                studentNumber = Integer.parseInt(studentNumberStr);
+                                password = Integer.parseInt(passwordStr);
+
+                                //메인화면으로 이동
+                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                LoginRequest loginRequest = new LoginRequest(studentNumberStr, passwordStr, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
             }
         });
     }
