@@ -1,0 +1,63 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:paddingBottom="20dp"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/reservation_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="예약한 스터디룸 : "
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/reservation_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="예약한 날짜 : "
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/reservation_room"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/reservation_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="예약한 시간 : "
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/reservation_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/reservation_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="예약인원 : "
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/reservation_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
