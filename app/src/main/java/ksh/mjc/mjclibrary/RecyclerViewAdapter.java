@@ -7,9 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,31 +101,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         public void timeLineColorChange(StudyRoom studyRoom, String selectedDate) {
-            for(int i=0; i<timelines.length; i++) { //시간 막대 색을 초기화
+            //시간 막대 색을 초기화
+            for(int i=0; i<timelines.length; i++) {
                 timelines[i].setBackgroundColor(context.getResources().getColor(R.color.available));
             }
+            //DB에서 해당 스터디룸 이름과 해당 날짜에 대한 예약시작시간과 예약종료시간을 가져와서 각각의 ArrayList에 넣어줌.
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        ArrayList<Integer> startTime = new ArrayList<>();//DB에서 가져온 예약시작시간들을 담을 배열
+                        ArrayList<Integer> endTime = new ArrayList<>();//DB에서 가져온 예약종료시간들을 담을 배열
+                        JSONArray startTimes = jsonResponse.getJSONArray("startTimes");
+                        JSONArray endTimes = jsonResponse.getJSONArray("endTimes");
 
-            //TODO DB에서 해당 스터디룸 이름과 해당 날짜에 대한 예약시작시간과 예약종료시간을 가져와서 각각의 ArrayList에 넣어줌.
-            ArrayList<Integer> startTime = new ArrayList<>(); //DB에서 가져온 예약시작시간들을 담을 배열
-            startTime.add(10);
-            startTime.add(11);
-            startTime.add(12);
-            startTime.add(15);
-            startTime.add(18);
-            ArrayList<Integer> endTime = new ArrayList<>();//DB에서 가져온 예약종료시간들을 담을 배열
-            endTime.add(11);
-            endTime.add(12);
-            endTime.add(14);
-            endTime.add(16);
-            endTime.add(19);
+                        for(int i=0; i<jsonResponse.getJSONArray("startTimes").length();i++) {
+                            startTime.add(Integer.parseInt(startTimes.getString(i).substring(0, 2)));
+                            endTime.add(Integer.parseInt(endTimes.getString(i).substring(0, 2)));
+                        }
 
-            if(selectedDate.equals("2024-05-27")) { //DB연동을 한다면 if문 안만 실행
-                //예약된 시간의 시간 막대 색을 변경
-                for(int i=0;i<startTime.toArray().length;i++) {
-                    timelines[startTime.get(i)-9].setBackgroundColor(context.getResources().getColor(R.color.reserved));
-                    timelines[endTime.get(i)-10].setBackgroundColor(context.getResources().getColor(R.color.reserved));
+                        //예약된 시간의 시간 막대 색을 변경
+                        for(int i=0;i<startTime.toArray().length;i++) {
+                            timelines[startTime.get(i)-9].setBackgroundColor(context.getResources().getColor(R.color.reserved));
+                            timelines[endTime.get(i)-10].setBackgroundColor(context.getResources().getColor(R.color.reserved));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
+            };
+
+            ReservationStatusRequest reservationStatusRequest = new ReservationStatusRequest(selectedDate, studyRoom.studyRoomName, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+            queue.add(reservationStatusRequest);
         }
     }
 }

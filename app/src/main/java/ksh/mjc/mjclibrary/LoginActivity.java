@@ -115,7 +115,6 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
-                            Log.d("ttt",String.valueOf(success));
 
                             if(success) { //학번과 비밀번호 인증이 성공이면
                                 //학번과 이름 저장
