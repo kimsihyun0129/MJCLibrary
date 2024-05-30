@@ -53,10 +53,13 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
     String useItems[] = {"스터디","모임/회의","기타"};//용도 선택 옵션 문자열 배열
     String studyRoomName;
     int minNumberOfPeople, maxNumberOfPeople;//선택된 스터디룸의 최소인원과 최대인원
+    private Login loginDTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_room_reservation_details);
+
+        loginDTO = (Login)getIntent().getSerializableExtra("loginDTO");
 
         //각각의 뷰 인플레이팅
         ibBack = findViewById(R.id.ibBack);
@@ -170,7 +173,27 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         //TODO DB에서 로그인 한 학생의 동반이용자 목록 가져오기
         //최근 동반이용자 목록 배열
         ArrayList<Student> alRecentAccompayingUser = new ArrayList<>();
-        alRecentAccompayingUser.add(new Student("aa",1323));
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray studentName = jsonResponse.getJSONArray("studentName");
+                    JSONArray studentNumber = jsonResponse.getJSONArray("studentNumber");
+
+                    for (int i = 0; i < studentName.length(); i++) {
+                        alRecentAccompayingUser.add(new Student(studentName.getString(i),studentNumber.getInt(i)));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        RecentAccompanyingUserReqeust recentAccompanyingUserReqeust = new RecentAccompanyingUserReqeust(loginDTO.getStudentNumber(), responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(recentAccompanyingUserReqeust);
+
         //최근 동반 이용자 리스트뷰 어댑터
         ListViewAdapter recentAccompanyingUserAdapter = new ListViewAdapter(getApplicationContext(),R.layout.recent_accompanying_user_item, alRecentAccompayingUser, alAddAccompayingUser, addAccompanyingUserAdapter);
         //어댑터를 리스트뷰에 연결
