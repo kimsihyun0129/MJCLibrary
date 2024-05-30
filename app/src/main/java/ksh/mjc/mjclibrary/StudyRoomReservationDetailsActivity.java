@@ -160,17 +160,37 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         btnAddAccompanyingUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //추가 동반이용자 목록에 추가
-                alAddAccompayingUser.add(new Student(etName.getText().toString(), Integer.parseInt(etStudentNumber.getText().toString())));
-                //어댑터에 변경 사실을 알림
-                addAccompanyingUserAdapter.notifyDataSetChanged();
-                //에디트 텍스트 모두 비워줌
-                etName.setText("");
-                etStudentNumber.setText("");
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.d("ttt",response);
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+
+                            if(success) { //학번과 비밀번호 인증이 성공이면
+                                //추가 동반이용자 목록에 추가
+                                alAddAccompayingUser.add(new Student(etName.getText().toString(), Integer.parseInt(etStudentNumber.getText().toString())));
+                                //어댑터에 변경 사실을 알림
+                                addAccompanyingUserAdapter.notifyDataSetChanged();
+                                //에디트 텍스트 모두 비워줌
+                                etName.setText("");
+                                etStudentNumber.setText("");
+                            } else {
+                                Toast.makeText(getApplicationContext(), "학번과 이름이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                AccompanyingUserRequest accompanyingUserRequest = new AccompanyingUserRequest(etName.getText().toString(), etStudentNumber.getText().toString(), responseListener);
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(accompanyingUserRequest);
             }
         });
 
-        //TODO DB에서 로그인 한 학생의 동반이용자 목록 가져오기
         //최근 동반이용자 목록 배열
         ArrayList<Student> alRecentAccompayingUser = new ArrayList<>();
         Response.Listener<String> responseListener = new Response.Listener<String>() {
