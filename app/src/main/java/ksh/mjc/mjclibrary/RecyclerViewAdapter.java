@@ -28,10 +28,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     ArrayList<StudyRoom> alStudyRoom;
     String selectedDate = "";//선택된 날짜
+    private Login loginDTO;
 
-    public RecyclerViewAdapter(Context context, ArrayList<StudyRoom> alStudyRoom) {
+    public RecyclerViewAdapter(Context context, ArrayList<StudyRoom> alStudyRoom, Login loginDTO) {
         this.context = context;
         this.alStudyRoom = alStudyRoom;
+        this.loginDTO = loginDTO;
     }
 
     public void updateSelectedDate(String newDate) {
@@ -90,6 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     intent.putExtra("minNumberOfPeople",alStudyRoom.get(getAdapterPosition()).minNumberOfPeople);
                     intent.putExtra("maxNumberOfPeople",alStudyRoom.get(getAdapterPosition()).maxNumberOfPeople);
                     intent.putExtra("selectDate",StudyRoomReservationActivity.tvSelectDate.getText().toString());
+                    intent.putExtra("loginDTO", loginDTO);
                     context.startActivity(intent);
                 }
             });

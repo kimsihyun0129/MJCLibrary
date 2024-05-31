@@ -32,17 +32,21 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
     static TextView tvSelectDate; //날짜 선택 텍스트뷰
     RecyclerView rvStudyRoom; //스터디룸 정보를 띄워줄 리사이클러뷰
     RecyclerViewAdapter studyRoomAdapter; //리사이클러뷰 선언
-    ArrayList<String> studyRoomNames = new ArrayList<>();
-    ArrayList<Integer> studyRoomMinNumberOfPeoPle = new ArrayList<>();
-    ArrayList<Integer> studyRoomMaxNumberOfPeople = new ArrayList<>();
+    ArrayList<String> studyRoomNames = new ArrayList<>();//스터디룸 이름 배열
+    ArrayList<Integer> studyRoomMinNumberOfPeoPle = new ArrayList<>();//스터디룸 최소 인원 배열
+    ArrayList<Integer> studyRoomMaxNumberOfPeople = new ArrayList<>();//스터디룸 최대 인원 배열
     Calendar calendar = Calendar.getInstance(); //현재 날짜를 불러오기 위한 캘린더 객체 생성
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //날짜 형식 지정
     String dateItems[] = new String[7]; //날짜 선택 옵션 배열
+    private Login loginDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_room_reservation);
+
+        loginDTO = (Login)getIntent().getSerializableExtra("loginDTO");
+        Log.d("ddd",String.valueOf(loginDTO.getStudentNumber()));
 
         //툴바 달기
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -112,7 +116,7 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
         }
 
         //리사이클러뷰(스터디룸 목록) 어댑터 생성
-        studyRoomAdapter = new RecyclerViewAdapter(this, alStudyRoom);
+        studyRoomAdapter = new RecyclerViewAdapter(this, alStudyRoom, loginDTO);
         //각각의 시간막대를 업데이트 해주는 메서드 호출
         studyRoomAdapter.updateSelectedDate(tvSelectDate.getText().toString());
         //리사이클러뷰를 어떻게 표시할 것인지 생성(리니어레이아웃)

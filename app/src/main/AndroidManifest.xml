@@ -29,7 +29,11 @@
         <activity
             android:name=".LoginActivity" android:label="로그인 액티비티"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -40,11 +44,7 @@
         <activity
             android:name=".MainActivity" android:label="툴바"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
