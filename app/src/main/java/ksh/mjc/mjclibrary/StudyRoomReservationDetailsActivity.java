@@ -41,7 +41,7 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
     ImageButton ibBack,ibSelectDate,ibSelectStartTime,ibSelectEndTime,ibUse; //뒤로가기 버튼, 날짜선택/시작시간/종료시간/용도 드롭다운이미지 버튼
     Button btnAddAccompanyingUser, btnReservation;//추가(동반이용자) 버튼, 예약 버튼
     TextView tvStudyRoomName, tvSelectDate, tvSelectStartTime, tvSelectEndTime, tvUse, tvAccompanyingUser;//스터디룸 이름/선택 날짜/선택 시작시간/선택 종료시간/선택 용도/동반이용자 텍스트 뷰
-    int theNumberOfAccompanyingUsers = 0;
+    int theNumberOfAccompanyingUsers = 0; //동반 이용자 수(기본값 0명)
     int[] timelineNames = {R.id.v9,R.id.v10,R.id.v11,R.id.v12,R.id.v13,R.id.v14,R.id.v15,R.id.v16,R.id.v17,R.id.v18,R.id.v19,R.id.v20,R.id.v21};//시간 막대에 대한 뷰
     View[] timelines = new View[timelineNames.length];// 시간 막대에 대한 배열
     RadioGroup rgAgree;//개인정보사용동의 여부 라디오 그룹
@@ -52,9 +52,9 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
     String startTimeItems[] = {"09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"};//시작시간 선택 옵션 문자열 배열
     String endTimeItems[] = {"10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00"};//종료시간 선택 옵션 문자열 배열
     String useItems[] = {"스터디","모임/회의","기타"};//용도 선택 옵션 문자열 배열
-    String studyRoomName;
+    String studyRoomName;//이전화면(스터디룸 예약 화면)에서 선택한 스터디룸 이름
     int minNumberOfPeople, maxNumberOfPeople;//선택된 스터디룸의 최소인원과 최대인원
-    private Login loginDTO;
+    private Login loginDTO;//저장시 활용할 Login DTO
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,59 +161,76 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         btnAddAccompanyingUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 응답 리스너 정의 (Response.Listener<String>)
+                // 서버로부터의 응답을 처리하기 위한 리스너 객체 생성
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            // 서버로부터의 응답을 JSON 객체로 변환
                             JSONObject jsonResponse = new JSONObject(response);
+                            // 응답 중 성공 여부를 판단하는 플래그 추출
                             boolean success = jsonResponse.getBoolean("success");
 
-                            if(success) { //학번과 비밀번호 인증이 성공이면
-                                //추가 동반이용자 목록에 추가
+                            if(success) { // 학번과 비밀번호 인증이 성공이면
+                                // 추가 동반이용자 목록에 추가
                                 alAddAccompayingUser.add(new Student(etName.getText().toString(), Integer.parseInt(etStudentNumber.getText().toString())));
-                                //어댑터에 변경 사실을 알림
+                                // 어댑터에 변경 사실을 알림
                                 addAccompanyingUserAdapter.notifyDataSetChanged();
-                                //에디트 텍스트 모두 비워줌
+                                // 에디트 텍스트 모두 비워줌
                                 etName.setText("");
                                 etStudentNumber.setText("");
                             } else {
+                                // 인증 실패 시 토스트 메시지 출력
                                 Toast.makeText(getApplicationContext(), "학번과 이름이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
+                            // JSON 파싱 중 예외 발생 시 스택 트레이스 출력
                             e.printStackTrace();
                         }
                     }
                 };
 
+                // 동반 이용자 인증 요청 객체 생성
                 AccompanyingUserRequest accompanyingUserRequest = new AccompanyingUserRequest(etName.getText().toString(), etStudentNumber.getText().toString(), responseListener);
+                // 요청 큐 생성 및 초기화
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                // 요청 큐에 인증 요청 추가
                 queue.add(accompanyingUserRequest);
             }
         });
 
         //최근 동반이용자 목록 배열
         ArrayList<Student> alRecentAccompayingUser = new ArrayList<>();
+        // Response.Listener를 사용하여 서버로부터의 응답을 처리하는 리스너 객체 생성
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    // 서버로부터의 응답을 JSON 객체로 변환
                     JSONObject jsonResponse = new JSONObject(response);
+                    // 응답 중 studentName과 studentNumber 배열을 추출
                     JSONArray studentName = jsonResponse.getJSONArray("studentName");
                     JSONArray studentNumber = jsonResponse.getJSONArray("studentNumber");
 
+                    // studentName 배열의 길이만큼 반복하여 alRecentAccompayingUser 리스트에 추가
                     for (int i = 0; i < studentName.length(); i++) {
-                        alRecentAccompayingUser.add(new Student(studentName.getString(i),studentNumber.getInt(i)));
+                        alRecentAccompayingUser.add(new Student(studentName.getString(i), studentNumber.getInt(i)));
                     }
                 } catch (JSONException e) {
+                    // JSON 파싱 중 예외 발생 시 스택 트레이스 출력
                     e.printStackTrace();
                 }
             }
         };
 
+        // RecentAccompanyingUserReqeust 객체 생성 (현재 로그인한 사용자의 학번과 응답 리스너를 인자로 전달)
         RecentAccompanyingUserReqeust recentAccompanyingUserReqeust = new RecentAccompanyingUserReqeust(loginDTO.getStudentNumber(), responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        queue.add(recentAccompanyingUserReqeust);
 
+        // 요청 큐 생성 및 초기화
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        // 요청 큐에 recentAccompanyingUserReqeust 추가
+        queue.add(recentAccompanyingUserReqeust);
         //최근 동반 이용자 리스트뷰 어댑터
         ListViewAdapter recentAccompanyingUserAdapter = new ListViewAdapter(getApplicationContext(),R.layout.recent_accompanying_user_item, alRecentAccompayingUser, alAddAccompayingUser, addAccompanyingUserAdapter);
         //어댑터를 리스트뷰에 연결
@@ -259,8 +276,11 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                     dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            //요청 객체 생성
                             SaveReservationRequest saveReservationRequest = new SaveReservationRequest(loginDTO.getStudentNumber(), studyRoomName, tvSelectDate.getText().toString(), tvSelectStartTime.getText().toString(), tvSelectEndTime.getText().toString(), tvUse.getText().toString(), alAddAccompayingUser);
+                            // 요청 큐 생성 및 초기화
                             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                            // 요청 큐에 saveReservationRequest 추가
                             queue.add(saveReservationRequest);
 
 
@@ -278,10 +298,12 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
             timelines[i].setBackgroundColor(getResources().getColor(R.color.available));
         }
         //DB에서 해당 스터디룸 이름과 해당 날짜에 대한 예약시작시간과 예약종료시간을 가져와서 각각의 ArrayList에 넣어줌.
+        //응답을 처리하는 리스너 객체 생성
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    // 서버로부터의 응답을 JSON 객체로 변환
                     JSONObject jsonResponse = new JSONObject(response);
                     ArrayList<Integer> startTime = new ArrayList<>();//DB에서 가져온 예약시작시간들을 담을 배열
                     ArrayList<Integer> endTime = new ArrayList<>();//DB에서 가져온 예약종료시간들을 담을 배열
@@ -303,9 +325,11 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                 }
             }
         };
-
+        //요청 객체 생성
         ReservationStatusRequest reservationStatusRequest = new ReservationStatusRequest(date, studyRoomName, responseListener);
+        //요청 큐 생성 및 초기화
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        //요청 큐에 reservationStatusRequest 추가
         queue.add(reservationStatusRequest);
     }
 
