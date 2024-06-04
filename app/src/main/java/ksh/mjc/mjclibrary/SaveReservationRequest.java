@@ -19,7 +19,6 @@ public class SaveReservationRequest extends StringRequest {
     private Map<String,String> parameters;
     public SaveReservationRequest(int studentNumber, String studyRoomName, String reservationDate, String reservationStartTime, String reservationEndTime, String reservationUse, ArrayList<Student> alAccompanyingUser) {
         super(Request.Method.POST, URL, null, null);
-        Log.d("ttt",String.valueOf(studentNumber)+""+reservationDate+""+reservationStartTime+""+reservationEndTime+""+reservationUse);
         parameters = new HashMap<>();
         parameters.put("studentNumber", String.valueOf(studentNumber));
         parameters.put("studyRoomName", studyRoomName);
@@ -32,16 +31,17 @@ public class SaveReservationRequest extends StringRequest {
             Student student = alAccompanyingUser.get(i);
             JSONObject studentJson = new JSONObject();
             try {
-                studentJson.put("auStudentName", student.getName());
-                studentJson.put("auStudentNumber", student.getStudentNumber());
+                studentJson.put("auStudentName", student.getName().toString());
+                studentJson.put("auStudentNumber", String.valueOf(student.getStudentNumber()));
+                Log.d("SaveReservationRequest", "Added student: " + student.getName() + ", " + student.getStudentNumber());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             jsonArray.put(studentJson);
         }
+        Log.d("SaveReservationRequest", "JSON Array: " + jsonArray.toString());
         parameters.put("alAccompanyingUser", jsonArray.toString());
     }
-
     public Map<String,String> getParams() {
         return parameters;
     }
