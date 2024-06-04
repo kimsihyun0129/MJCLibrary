@@ -6,6 +6,8 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,30 +17,23 @@ import java.util.List;
 
 public class booksearch extends AppCompatActivity {
 
-    private ListView listView;
-    private Booksearch_adapter adapter;
-    private List<booklistitem> booklist;
+    RecyclerView bookrv;
+
+    Booksearch_adapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activirty_search);
 
-        Intent intent = getIntent();
+        bookrv = findViewById(R.id.rvSearchbook);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+        bookrv.setLayoutManager(layoutManager);
 
-        listView = findViewById(R.id.Booklist);
-        booklist = new ArrayList<booklistitem>();
+        adapter = new Booksearch_adapter(getApplicationContext());
+        bookrv.setAdapter(adapter);
 
-        adapter = new Booksearch_adapter(getApplicationContext(),booklist);
-        listView.setAdapter(adapter);
 
-        try {
-            JSONObject jsonObject = new JSONObject(intent.getStringExtra("Booklist"));
-
-            JSONArray jsonArray = jsonObject.getJSONArray("");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
     }
 }
