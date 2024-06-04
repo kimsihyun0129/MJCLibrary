@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private int studentNumber, password;//학번과 비밀번호를 저장할 변수
     EditText etStudentNumber,etPassword; //학번/비밀번호 입력란
     TextView tvIdHint,tvPasswordHint;//힌트나 오류메시지를 띄워줄 텍스트뷰
-
+    private Login loginDTO;//로그인 정보를 저장할 DTO
     Button btnLogin;//로그인 버튼
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,9 +120,11 @@ public class LoginActivity extends AppCompatActivity {
                                 //학번과 이름 저장
                                 studentNumber = Integer.parseInt(studentNumberStr);
                                 password = Integer.parseInt(passwordStr);
+                                loginDTO = new Login(studentNumber,password);
 
                                 //메인화면으로 이동
                                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                intent.putExtra("loginDTO", loginDTO);
                                 startActivity(intent);
                             }
                         } catch (JSONException e) {

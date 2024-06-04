@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Button btnBooksearch, btnStudyRoom;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnBooksearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 인텐트 사용하여 도서검색 화면으로 이동
+
             }
         });
 
