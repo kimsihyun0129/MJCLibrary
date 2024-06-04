@@ -26,21 +26,12 @@ public class SaveReservationRequest extends StringRequest {
         parameters.put("reservationStartTime", reservationStartTime);
         parameters.put("reservationEndTime", reservationEndTime);
         parameters.put("reservationUse", reservationUse);
-        JSONArray jsonArray = new JSONArray();
+
         for(int i=0; i<alAccompanyingUser.size();i++) {
-            Student student = alAccompanyingUser.get(i);
-            JSONObject studentJson = new JSONObject();
-            try {
-                studentJson.put("auStudentName", student.getName().toString());
-                studentJson.put("auStudentNumber", String.valueOf(student.getStudentNumber()));
-                Log.d("SaveReservationRequest", "Added student: " + student.getName() + ", " + student.getStudentNumber());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            jsonArray.put(studentJson);
+            parameters.put("auStudentName"+i,alAccompanyingUser.get(i).getName().toString());
+            parameters.put("auStudentNumber"+i, String.valueOf(alAccompanyingUser.get(i).getStudentNumber()));
         }
-        Log.d("SaveReservationRequest", "JSON Array: " + jsonArray.toString());
-        parameters.put("alAccompanyingUser", jsonArray.toString());
+        parameters.put("count",String.valueOf(alAccompanyingUser.size()));
     }
     public Map<String,String> getParams() {
         return parameters;

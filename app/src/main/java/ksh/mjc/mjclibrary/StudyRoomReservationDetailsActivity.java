@@ -282,8 +282,10 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                             // 요청 큐에 saveReservationRequest 추가
                             queue.add(saveReservationRequest);
-
-
+                            dialog.dismiss();
+                            Toast.makeText(getApplicationContext(),"예약이 완료되었습니다.",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
                         }
                     });
                     dialog.setNegativeButton("취소",null);
