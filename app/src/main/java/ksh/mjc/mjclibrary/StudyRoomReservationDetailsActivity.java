@@ -333,6 +333,24 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         //요청 큐에 reservationStatusRequest 추가
         queue.add(reservationStatusRequest);
+
+        // 현재 날짜를 yyyy-MM-dd 형식으로 가져오기
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = sdf.format(new Date());
+
+        // 현재 시간 변수
+        int currentHour = -1;
+
+        // selectedDate가 현재 날짜인지 확인
+        if (date.equals(currentDate)) {
+            // 현재 시간을 가져오기
+            Calendar calendar = Calendar.getInstance();
+            currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+            //애뮬레이터 시간에 맞춤
+            for(int i=0; i<currentHour+8 && i<timelines.length; i++) {
+                timelines[i].setBackgroundColor(getResources().getColor(R.color.unAvailable));
+            }
+        }
     }
 
     //리스너에 안전하게 전달하기 위해 final 사용

@@ -21,7 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> { //리사이클러뷰 어댑터를 상속받은 클래스
@@ -138,6 +141,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ReservationStatusRequest reservationStatusRequest = new ReservationStatusRequest(selectedDate, studyRoom.studyRoomName, responseListener);
             RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
             queue.add(reservationStatusRequest);
+
+            // 현재 날짜를 yyyy-MM-dd 형식으로 가져오기
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String currentDate = sdf.format(new Date());
+
+            // 현재 시간 변수
+            int currentHour = -1;
+
+            // selectedDate가 현재 날짜인지 확인
+            if (selectedDate.equals(currentDate)) {
+                // 현재 시간을 가져오기
+                Calendar calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                Log.d("ddd",String.valueOf(currentHour));
+                //애뮬레이터 시간에 맞춤
+                for(int i=0; i<currentHour+8 && i<timelines.length; i++) {
+                    timelines[i].setBackgroundColor(context.getResources().getColor(R.color.unAvailable));
+                }
+            }
         }
     }
 }
