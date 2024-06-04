@@ -13,16 +13,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar"/>
 
-     <ImageView
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:id="@+id/lib_search"
+        <ImageView
+            android:id="@+id/lib_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rotation="90"
+            android:scaleX="3"
+            android:scaleY="3"
+            android:src="@raw/main_library"
 
-         />
-
-
+            />
 
 
     </LinearLayout>

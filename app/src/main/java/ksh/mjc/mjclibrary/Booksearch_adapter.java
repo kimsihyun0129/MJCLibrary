@@ -1,5 +1,9 @@
 package ksh.mjc.mjclibrary;
 
+import android.content.Intent;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,53 +12,65 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Booksearch_adapter extends BaseAdapter {
 
-private  Context context;
-private List<booklistitem> booklist;
+public class Booksearch_adapter extends RecyclerView.Adapter<Booksearch_adapter.ViewHolder> {
+    private Context context;
+    ArrayList<booklistitem> books  = new ArrayList<>();
 
-public  Booksearch_adapter(Context context, List<booklistitem> booklist){
-    this.context=context;
-    this.booklist=booklist;
-}
-
-@Override
-    public int getCount(){
-    return booklist.size();
-}
-
+    public Booksearch_adapter(Context context){
+        this.context = context;
+    }
+    @NonNull
     @Override
-    public Object getItem(int i){
-        return booklist.get(i);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE );
+        View itemView = inflater.inflate(R.layout.search_book_item,parent,false);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public long getItemId(int i){
-    return i;
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        booklistitem item = books.get(position);
+        holder.setItem(item);
+
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup){
-    View v = View.inflate(context,R.layout.search_book_item,null);
-
-    TextView bookname = v.findViewById(R.id.bookname);
-    ImageView bookimg = v.findViewById(R.id.bookimg);
-    TextView bookmaker = v.findViewById(R.id.bookmaker);
-    TextView bookoffice = v.findViewById(R.id.bookoffice);
-    TextView librarycode = v.findViewById(R.id.librarycode);
-
-    bookname.setText(booklist.get(i).getBookname());
-    bookmaker.setText(booklist.get(i).getBookmaker());
-    bookoffice.setText(booklist.get(i).getBookoffice());
-    librarycode.setText(booklist.get(i).getLibrarycode());
-
-    return v;
+    public int getItemCount() {
+        return books.size();
     }
 
 
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView Bookname;
+        ImageView BookImg;
+        TextView Author;
+        TextView Publisher;
+        TextView BookCode;
 
+
+
+
+        public ViewHolder(@NonNull View itemView){
+            super(itemView);
+
+            Bookname = itemView.findViewById(R.id.bookname);
+            BookImg =  itemView.findViewById(R.id.bookimg);
+            Author = itemView.findViewById(R.id.bookmaker);
+            Publisher = itemView.findViewById(R.id.bookoffice);
+            BookCode = itemView.findViewById(R.id.librarycode);
+
+        }
+
+        public void setItem(booklistitem item){
+
+        }
+    }
 }

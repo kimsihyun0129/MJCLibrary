@@ -4,8 +4,8 @@ public class booklistitem {
 
     String bookname;
     String bookimg;
-    String bookmaker;
-    String bookoffice;
+    String bookauthor;
+    String bookpublisher;
     String librarycode;
 
 
@@ -25,20 +25,20 @@ public class booklistitem {
         this.bookimg = bookimg;
     }
 
-    public String getBookmaker() {
-        return bookmaker;
+    public String getBookauthor() {
+        return bookauthor;
     }
 
-    public void setBookmaker(String bookmaker) {
-        this.bookmaker = bookmaker;
+    public void setBookauthor(String bookauthor) {
+        this.bookauthor = bookauthor;
     }
 
-    public String getBookoffice() {
-        return bookoffice;
+    public String getBookpublisher() {
+        return bookpublisher;
     }
 
-    public void setBookoffice(String bookoffice) {
-        this.bookoffice = bookoffice;
+    public void setBookpublisher(String bookpublisher) {
+        this.bookpublisher = bookpublisher;
     }
 
     public String getLibrarycode() {
@@ -49,11 +49,11 @@ public class booklistitem {
         this.librarycode = librarycode;
     }
 
-public booklistitem(String bookname, String bookimg, String bookmaker, String bookoffice, String librarycode){
+public booklistitem(String bookname, String bookimg, String bookauthor, String bookpublisher, String librarycode){
         this.bookname = bookname;
         this.bookimg = bookimg;
-        this.bookmaker = bookmaker;
-        this.bookoffice = bookoffice;
+        this.bookauthor = bookauthor;
+        this.bookpublisher = bookpublisher;
         this.librarycode = librarycode;
 }
 
