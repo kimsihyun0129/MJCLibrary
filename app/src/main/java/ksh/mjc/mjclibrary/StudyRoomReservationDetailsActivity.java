@@ -172,7 +172,7 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                             // 응답 중 성공 여부를 판단하는 플래그 추출
                             boolean success = jsonResponse.getBoolean("success");
 
-                            if(success) { // 학번과 비밀번호 인증이 성공이면
+                            if(success) { // 이름과 학번 인증이 성공이면
                                 // 추가 동반이용자 목록에 추가
                                 alAddAccompayingUser.add(new Student(etName.getText().toString(), Integer.parseInt(etStudentNumber.getText().toString())));
                                 // 어댑터에 변경 사실을 알림
@@ -190,7 +190,6 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                         }
                     }
                 };
-
                 // 동반 이용자 인증 요청 객체 생성
                 AccompanyingUserRequest accompanyingUserRequest = new AccompanyingUserRequest(etName.getText().toString(), etStudentNumber.getText().toString(), responseListener);
                 // 요청 큐 생성 및 초기화
@@ -226,11 +225,11 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
 
         // RecentAccompanyingUserReqeust 객체 생성 (현재 로그인한 사용자의 학번과 응답 리스너를 인자로 전달)
         RecentAccompanyingUserReqeust recentAccompanyingUserReqeust = new RecentAccompanyingUserReqeust(loginDTO.getStudentNumber(), responseListener);
-
         // 요청 큐 생성 및 초기화
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         // 요청 큐에 recentAccompanyingUserReqeust 추가
         queue.add(recentAccompanyingUserReqeust);
+
         //최근 동반 이용자 리스트뷰 어댑터
         ListViewAdapter recentAccompanyingUserAdapter = new ListViewAdapter(getApplicationContext(),R.layout.recent_accompanying_user_item, alRecentAccompayingUser, alAddAccompayingUser, addAccompanyingUserAdapter);
         //어댑터를 리스트뷰에 연결
