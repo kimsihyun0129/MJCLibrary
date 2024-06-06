@@ -1,6 +1,9 @@
 package ksh.mjc.mjclibrary;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,14 +51,16 @@ public class Booksearch_adapter extends RecyclerView.Adapter<Booksearch_adapter.
         return books.size();
     }
 
-
+    public void setBookList(ArrayList<booklistitem> bookList) {
+        this.books = bookList;
+        notifyDataSetChanged(); // 데이터가 변경되었음을 어댑터에 알림
+    }
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView Bookname;
-        ImageView BookImg;
+        ImageButton BookImg;
         TextView Author;
         TextView Publisher;
         TextView BookCode;
-
 
 
 
@@ -70,7 +76,20 @@ public class Booksearch_adapter extends RecyclerView.Adapter<Booksearch_adapter.
         }
 
         public void setItem(booklistitem item){
+            Bookname.setText(item.getBookname());
+            Author.setText(item.getBookauthor());
+            Publisher.setText(item.getBookpublisher());
+            BookCode.setText(item.getLibrarycode());
 
+            // Decode base64 string to a Bitmap and set it to the ImageView
+            String base64Image = item.getBookimg();  // Assuming `getBookImg()` returns a base64 string
+            if (base64Image != null && !base64Image.isEmpty()) {
+                byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                BookImg.setImageBitmap(decodedByte);
+            }
         }
+
+
     }
-}
+    }

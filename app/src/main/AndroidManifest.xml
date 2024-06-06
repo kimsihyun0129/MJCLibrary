@@ -33,11 +33,7 @@
         <activity
             android:name=".SplashActivity" android:label="스플래쉬 액티비티"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity" android:label="툴바"
@@ -46,7 +42,11 @@
         </activity>
         <activity android:name=".booksearch" android:label="검색"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

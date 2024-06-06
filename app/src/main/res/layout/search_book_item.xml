@@ -20,7 +20,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/main_color"/>
 
-    <ImageView
+
+    <ImageButton
         android:id="@+id/bookimg"
         android:layout_width="100dp"
         android:layout_height="140dp"

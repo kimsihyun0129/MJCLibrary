@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                 intent.putExtra("loginDTO", loginDTO);
                                 startActivity(intent);
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
