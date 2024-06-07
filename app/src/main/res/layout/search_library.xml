@@ -21,7 +21,7 @@
             android:rotation="90"
             android:scaleX="3"
             android:scaleY="3"
-            android:src="@raw/main_library"
+            android:src="@drawable/main_library"
 
             />
 

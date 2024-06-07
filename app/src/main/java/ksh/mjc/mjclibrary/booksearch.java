@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -28,6 +30,8 @@ import java.util.List;
 
 public class booksearch extends AppCompatActivity {
 
+    List<String> book;
+    AutoCompleteTextView search_book;
     RecyclerView bookrv;
 
     Booksearch_adapter adapter;
@@ -40,9 +44,7 @@ public class booksearch extends AppCompatActivity {
 
     ArrayList<Integer> bloca1 = new ArrayList<>();
 
-    EditText search_book;
     String Book_search;
-
 
 
     @Override
@@ -52,7 +54,7 @@ public class booksearch extends AppCompatActivity {
 
 
         search_book = findViewById(R.id.search_book);
-        Book_search = search_book.getText().toString();
+
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -74,7 +76,7 @@ public class booksearch extends AppCompatActivity {
                         bpublisher.add(Bpublisher.getString(i));
                         bcode.add(Bcode.getString(i));
                         bloca1.add(Bloca1.getInt(i));
-
+                        book.add(bname.get(i));
                     }
 
                     // 비동기 요청 후 RecyclerView 설정
@@ -90,28 +92,8 @@ public class booksearch extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(bookRequeste);
 
-        bookrv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),library.class);
-                intent.putExtra("loca1",bloca1);
-                startActivity(intent);
-            }
-        });
-        search_book.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        search_book.setAdapter(new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, book));
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterBooks(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
     }
 
 
@@ -133,25 +115,6 @@ public class booksearch extends AppCompatActivity {
 
     }
 
-    private void filterBooks(String query) {
-        ArrayList<String> filteredNames = new ArrayList<>();
-        ArrayList<String> filteredImgs = new ArrayList<>();
-        ArrayList<String> filteredAuthors = new ArrayList<>();
-        ArrayList<String> filteredPublishers = new ArrayList<>();
-        ArrayList<String> filteredCodes = new ArrayList<>();
-
-        for (int i = 0; i < bname.size(); i++) {
-            if (bname.get(i).toLowerCase().contains(query.toLowerCase())) {
-                filteredNames.add(bname.get(i));
-                filteredImgs.add(bimg.get(i));
-                filteredAuthors.add(bauthor.get(i));
-                filteredPublishers.add(bpublisher.get(i));
-                filteredCodes.add(bcode.get(i));
-            }
-        }
-
-        setBookView(filteredNames, filteredImgs, filteredAuthors, filteredPublishers, filteredCodes);
-    }
 }
 
 

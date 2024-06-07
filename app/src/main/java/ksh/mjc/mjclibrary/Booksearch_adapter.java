@@ -51,10 +51,6 @@ public class Booksearch_adapter extends RecyclerView.Adapter<Booksearch_adapter.
         return books.size();
     }
 
-    public void setBookList(ArrayList<booklistitem> bookList) {
-        this.books = bookList;
-        notifyDataSetChanged(); // 데이터가 변경되었음을 어댑터에 알림
-    }
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView Bookname;
         ImageButton BookImg;
