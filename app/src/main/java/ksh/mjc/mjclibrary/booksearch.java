@@ -30,7 +30,7 @@ import java.util.List;
 
 public class booksearch extends AppCompatActivity {
 
-    List<String> book;
+
     AutoCompleteTextView search_book;
     RecyclerView bookrv;
 
@@ -43,7 +43,7 @@ public class booksearch extends AppCompatActivity {
     ArrayList<String> bcode = new ArrayList<>();
 
     ArrayList<Integer> bloca1 = new ArrayList<>();
-
+    ArrayList<String> book = new ArrayList<>();
     String Book_search;
 
 
@@ -52,9 +52,10 @@ public class booksearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activirty_search);
 
+        booklist();
 
         search_book = findViewById(R.id.search_book);
-
+        search_book.setAdapter(new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, book));
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -76,7 +77,7 @@ public class booksearch extends AppCompatActivity {
                         bpublisher.add(Bpublisher.getString(i));
                         bcode.add(Bcode.getString(i));
                         bloca1.add(Bloca1.getInt(i));
-                        book.add(bname.get(i));
+
                     }
 
                     // 비동기 요청 후 RecyclerView 설정
@@ -88,14 +89,20 @@ public class booksearch extends AppCompatActivity {
             }
         };
 
+
         BookRequeste bookRequeste = new BookRequeste(responseListener);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(bookRequeste);
 
-        search_book.setAdapter(new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, book));
+
 
     }
 
+    private void booklist(){
+        for(int i = 0; i<bname.size(); i++){
+            book.add(bname.get(i).toString());
+        }
+    }
 
     private void setBookView(ArrayList<String> names, ArrayList<String> imgs, ArrayList<String> authors, ArrayList<String> publishers, ArrayList<String> codes) {
         //스터디룸 목록 배열
