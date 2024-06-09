@@ -154,8 +154,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 // 현재 시간을 가져오기
                 Calendar calendar = Calendar.getInstance();
                 currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-                //애뮬레이터 시간에 맞춤
-                for(int i=0; i<currentHour+8 && i<timelines.length; i++) {
+                // 현재시간을 기준으로 사용불가시간 초기화
+                for(int i=0; i<currentHour-8 && i<timelines.length; i++) {
                     timelines[i].setBackgroundColor(context.getResources().getColor(R.color.unAvailable));
                 }
             }

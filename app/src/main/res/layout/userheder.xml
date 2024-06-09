@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     android:orientation="vertical"
     android:background="@color/main_color"
     android:gravity="bottom"
@@ -11,11 +11,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="사용자 : 신강현 \n학번 : 2019111062 \n학과 : 컴퓨터공학과  3학년\n"
+        android:text="사용자 : 신강현 \n학번 : 2019111062 \n학과 : 컴퓨터공학과\n"
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="bottom"
-        android:paddingLeft="15dp"
         android:textColor="@android:color/black"
         android:id="@+id/userInFor"
        />

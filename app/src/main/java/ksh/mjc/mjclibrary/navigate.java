@@ -18,7 +18,6 @@ import com.google.android.material.navigation.NavigationView;
 public class navigate extends AppCompatActivity {
 
     private Toolbar toolbar;
-
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
