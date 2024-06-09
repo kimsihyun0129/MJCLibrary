@@ -83,8 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.reservation) {
-                    menuItem.setChecked(true);
-                    drawerLayout.closeDrawers();
+                  Intent intent = new Intent(getApplicationContext(), Reservation_status_Main.class);
+                    intent.putExtra("loginDTO",loginDTO);
+                    startActivity(intent);
+
                     return true;
                 } else if (itemId == R.id.log_out) {
                     menuItem.setChecked(true);

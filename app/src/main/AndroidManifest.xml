@@ -28,7 +28,11 @@
         <activity
             android:name=".LoginActivity" android:label="로그인 액티비티"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity" android:label="스플래쉬 액티비티"
@@ -42,11 +46,7 @@
         </activity>
         <activity android:name=".booksearch" android:label="검색"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".library" android:exported="true">
@@ -55,6 +55,10 @@
         </activity>
         <activity android:name=".navigate" android:label="검색"
             android:exported="true">
+
+        </activity>
+        <activity android:name=".Reservation_status_Main" android:exported="true">
+
 
         </activity>
 

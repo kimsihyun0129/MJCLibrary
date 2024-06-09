@@ -44,11 +44,12 @@
         app:layout_constraintTop_toBottomOf="@id/reservation_date"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textColor="@color/black"/>
+
     <TextView
-        android:id="@+id/reservation_person"
+        android:id="@+id/reservation_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="예약인원 : "
+        android:text="사용 용도 : "
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="20sp"

@@ -22,7 +22,7 @@ public class library extends AppCompatActivity {
         Intent intent  = getIntent();
         code = intent.getIntExtra("location",0);
 
-        if(code <=0 || code >=100){
+        if(code <=0 || code >100){
             if(code<=0||code>=14) {
                 lib_search.setImageResource(R.drawable.library1_0_14);
             }
@@ -45,6 +45,25 @@ public class library extends AppCompatActivity {
                 lib_search.setImageResource(R.drawable.library1_84_100);
             }
         }
+        else if(code <=100 || code >200){
+            if(code<=100||code>=114) {
+                lib_search.setImageResource(R.drawable.library2_0_14);
+            }
+            if(code<100||code>=114) {
+                lib_search.setImageResource(R.drawable.library2_0_14);
+            }
+
+        }
+        else if(code <=200 || code >300){
+
+        }
+        else if(code <=300 || code >400){}
+        else if(code <=400 || code >500){}
+        else if(code <=500 || code >600){}
+        else if(code <=600 || code >700){}
+        else if(code <=700 || code >800){}
+        else if(code <=800 || code >900){}
+        else if(code <=900 || code >1000){}
 
 
 
