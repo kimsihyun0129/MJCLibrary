@@ -20,7 +20,7 @@ public class library extends AppCompatActivity {
 
         lib_search = findViewById(R.id.lib_search);
         Intent intent  = getIntent();
-        code = intent.getIntExtra("loca1",0);
+        code = intent.getIntExtra("location",0);
 
         if(code <=0 || code >=100){
             if(code<=0||code>=14) {
