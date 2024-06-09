@@ -7,8 +7,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -32,18 +34,10 @@ public class booksearch extends AppCompatActivity {
 
 
     AutoCompleteTextView search_book;
-    RecyclerView bookrv;
+    ListView bookrv;
+    Button searchbtn;
 
-    Booksearch_adapter adapter;
-
-    ArrayList<String> bname = new ArrayList<>();
-    ArrayList<String> bimg = new ArrayList<>();
-    ArrayList<String> bauthor = new ArrayList<>();
-    ArrayList<String> bpublisher = new ArrayList<>();
-    ArrayList<String> bcode = new ArrayList<>();
-
-    ArrayList<Integer> bloca1 = new ArrayList<>();
-    ArrayList<String> book = new ArrayList<>();
+    List<String> book;
     String Book_search;
 
 
@@ -52,76 +46,63 @@ public class booksearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activirty_search);
 
-        booklist();
 
+        searchbtn = findViewById(R.id.searchbtn);
         search_book = findViewById(R.id.search_book);
-        search_book.setAdapter(new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, book));
+        bookrv = findViewById(R.id.listSearchbook);
+        book = new ArrayList<String>();
 
+
+
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Book_search = search_book.getText().toString();
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            JSONArray bookname = jsonResponse.getJSONArray("book_name");
+                            JSONArray bookauthor = jsonResponse.getJSONArray("author");
+                            JSONArray bookpublisher = jsonResponse.getJSONArray("publisher");
+                            JSONArray bookcode = jsonResponse.getJSONArray("book_code");
+                            JSONArray bookloca = jsonResponse.getJSONArray("book_loca");
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+
+            }
+        });
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray Bname = jsonResponse.getJSONArray("book_name");
-                    JSONArray Bimg = jsonResponse.getJSONArray("book_img");
-                    JSONArray Bauthor = jsonResponse.getJSONArray("author");
-                    JSONArray Bpublisher = jsonResponse.getJSONArray("publisher");
-                    JSONArray Bcode = jsonResponse.getJSONArray("book_code");
-                    JSONArray Bloca1 = jsonResponse.getJSONArray("book_loca");
+                    JSONArray bookname = jsonResponse.getJSONArray("book_name");
 
 
-                    for (int i = 0; i < Bname.length(); i++) {
-                        bname.add(Bname.getString(i));
-                        bimg.add(Bimg.getString(i));
-                        bauthor.add(Bauthor.getString(i));
-                        bpublisher.add(Bpublisher.getString(i));
-                        bcode.add(Bcode.getString(i));
-                        bloca1.add(Bloca1.getInt(i));
-
+                    for (int i = 0; i < bookname.length(); i++) {
+                        book.add(bookname.getString(i));
                     }
 
-                    // 비동기 요청 후 RecyclerView 설정
-                    setBookView(bname, bimg, bauthor, bpublisher, bcode);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
-
-
         BookRequeste bookRequeste = new BookRequeste(responseListener);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(bookRequeste);
 
 
-
-    }
-
-    private void booklist(){
-        for(int i = 0; i<bname.size(); i++){
-            book.add(bname.get(i).toString());
-        }
-    }
-
-    private void setBookView(ArrayList<String> names, ArrayList<String> imgs, ArrayList<String> authors, ArrayList<String> publishers, ArrayList<String> codes) {
-        //스터디룸 목록 배열
-        ArrayList<booklistitem> albook = new ArrayList<>();
-
-        //각각의 스터디룸 객체를 생성하여 스터디룸 목록 배열에 넣어줌
-        for (int i = 0; i < bname.size(); i++) {
-            albook.add(new booklistitem(bname.get(i), bimg.get(i), bauthor.get(i), bpublisher.get(i), bcode.get(i)));
-        }
-
-        bookrv = findViewById(R.id.rvSearchbook);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        bookrv.setLayoutManager(layoutManager);
-
-        adapter = new Booksearch_adapter(getApplicationContext());
-        bookrv.setAdapter(adapter);
-
+        search_book.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,book));
     }
 
 }
-
-

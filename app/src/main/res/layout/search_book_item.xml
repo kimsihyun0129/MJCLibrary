@@ -21,7 +21,7 @@
         android:textColor="@color/main_color"/>
 
 
-    <ImageButton
+    <ImageView
         android:id="@+id/bookimg"
         android:layout_width="100dp"
         android:layout_height="140dp"
