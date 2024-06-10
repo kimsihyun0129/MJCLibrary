@@ -17,16 +17,16 @@
         tools:targetApi="31"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="whateverString">
-        <activity android:name=".StudyRoomReservationDetailsActivity" android:label="스터디룸 예약 상세 액티비티"
+        <activity android:name=".Activity.StudyRoomReservationDetailsActivity" android:label="스터디룸 예약 상세 액티비티"
             android:exported="true">
         </activity>
         <activity
-            android:name=".StudyRoomReservationActivity" android:label="스터디룸 예약 액티비티"
+            android:name=".Activity.StudyRoomReservationActivity" android:label="스터디룸 예약 액티비티"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".LoginActivity" android:label="로그인 액티비티"
+            android:name=".Activity.LoginActivity" android:label="로그인 액티비티"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,25 +35,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashActivity" android:label="스플래쉬 액티비티"
+            android:name=".Activity.SplashActivity" android:label="스플래쉬 액티비티"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".MainActivity" android:label="메인 액티비티"
+            android:name=".Activity.MainActivity" android:label="메인 액티비티"
             android:exported="true">
 
         </activity>
-        <activity android:name=".booksearch" android:label="검색"
+        <activity android:name=".Activity.booksearch" android:label="검색"
             android:exported="true">
 
 
         </activity>
-        <activity android:name=".library" android:exported="true">
+        <activity android:name=".Activity.library" android:exported="true">
 
 
         </activity>
-        <activity android:name=".Reservation_status_Main" android:exported="true">
+        <activity android:name=".Activity.Reservation_status_Main" android:exported="true">
 
 
         </activity>

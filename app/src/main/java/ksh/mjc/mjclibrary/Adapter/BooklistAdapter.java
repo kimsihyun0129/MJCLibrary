@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ksh.mjc.mjclibrary.DTO.Bookdata;
+import ksh.mjc.mjclibrary.R;
 
 public class BooklistAdapter extends BaseAdapter {
     Context mContext = null;

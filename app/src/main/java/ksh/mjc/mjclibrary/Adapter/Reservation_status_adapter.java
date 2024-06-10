@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ksh.mjc.mjclibrary.DTO.Reservation_status;
+import ksh.mjc.mjclibrary.R;
 
 public class Reservation_status_adapter extends BaseAdapter {
     Context mContext = null;

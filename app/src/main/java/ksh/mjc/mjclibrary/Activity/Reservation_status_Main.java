@@ -1,10 +1,8 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import ksh.mjc.mjclibrary.DTO.Login;
+import ksh.mjc.mjclibrary.R;
+import ksh.mjc.mjclibrary.DTO.Reservation_status;
+import ksh.mjc.mjclibrary.Adapter.Reservation_status_adapter;
+import ksh.mjc.mjclibrary.Request.Reservation_status_request;
 
 public class Reservation_status_Main extends AppCompatActivity {
     private Login loginDTO;

@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.DTO;
 
 public class Student { //학생 클래스
     private String name; //이름 저장할 문자열 변수

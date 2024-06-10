@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Request;
 
 import androidx.annotation.Nullable;
 

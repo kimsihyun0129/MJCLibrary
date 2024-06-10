@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import ksh.mjc.mjclibrary.R;
 
 public class library extends AppCompatActivity {
 

@@ -1,24 +1,17 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,9 +21,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+
+import ksh.mjc.mjclibrary.Request.BookRequeste;
+import ksh.mjc.mjclibrary.DTO.Bookdata;
+import ksh.mjc.mjclibrary.Adapter.BooklistAdapter;
+import ksh.mjc.mjclibrary.R;
 
 public class booksearch extends AppCompatActivity {
 

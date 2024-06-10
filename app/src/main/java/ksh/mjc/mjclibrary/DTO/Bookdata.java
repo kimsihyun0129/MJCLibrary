@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.DTO;
 
 public class Bookdata {
     String book_name, book_author,book_publisher, book_code;

@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -25,7 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+
+import ksh.mjc.mjclibrary.Activity.StudyRoomReservationActivity;
+import ksh.mjc.mjclibrary.Activity.StudyRoomReservationDetailsActivity;
+import ksh.mjc.mjclibrary.DTO.Login;
+import ksh.mjc.mjclibrary.DTO.StudyRoom;
+import ksh.mjc.mjclibrary.R;
+import ksh.mjc.mjclibrary.Request.ReservationStatusRequest;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> { //리사이클러뷰 어댑터를 상속받은 클래스
     private Context context;
@@ -94,7 +98,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     intent.putExtra("studyRoomName",tvStudyRoomName.getText().toString());
                     intent.putExtra("minNumberOfPeople",alStudyRoom.get(getAdapterPosition()).minNumberOfPeople);
                     intent.putExtra("maxNumberOfPeople",alStudyRoom.get(getAdapterPosition()).maxNumberOfPeople);
-                    intent.putExtra("selectDate",StudyRoomReservationActivity.tvSelectDate.getText().toString());
+                    intent.putExtra("selectDate", StudyRoomReservationActivity.tvSelectDate.getText().toString());
                     intent.putExtra("loginDTO", loginDTO);
                     context.startActivity(intent);
                 }

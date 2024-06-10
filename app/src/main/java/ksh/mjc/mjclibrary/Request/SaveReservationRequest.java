@@ -1,18 +1,13 @@
-package ksh.mjc.mjclibrary;
-
-import android.util.Log;
+package ksh.mjc.mjclibrary.Request;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import ksh.mjc.mjclibrary.DTO.Student;
 
 public class SaveReservationRequest extends StringRequest {
     final static private String URL = "http://27.96.131.54:8080/2020081064/SaveReservation.jsp";

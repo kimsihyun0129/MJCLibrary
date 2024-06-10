@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Request;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;

@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,9 +25,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import ksh.mjc.mjclibrary.DTO.Login;
+import ksh.mjc.mjclibrary.R;
+import ksh.mjc.mjclibrary.Adapter.RecyclerViewAdapter;
+import ksh.mjc.mjclibrary.DTO.StudyRoom;
+import ksh.mjc.mjclibrary.Request.StudyRoomRequest;
+
 public class StudyRoomReservationActivity extends AppCompatActivity {
     ImageButton ibBack, ibSelectDate; //뒤로가기 버튼, 날짜선택버튼
-    static TextView tvSelectDate; //날짜 선택 텍스트뷰
+    public static TextView tvSelectDate; //날짜 선택 텍스트뷰
     RecyclerView rvStudyRoom; //스터디룸 정보를 띄워줄 리사이클러뷰
     RecyclerViewAdapter studyRoomAdapter; //리사이클러뷰 선언
     ArrayList<String> studyRoomNames = new ArrayList<>();//스터디룸 이름 배열

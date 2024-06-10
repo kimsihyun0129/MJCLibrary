@@ -1,11 +1,12 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
+
+import ksh.mjc.mjclibrary.R;
 
 public class SplashActivity extends AppCompatActivity {
 

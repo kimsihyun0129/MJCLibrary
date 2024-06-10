@@ -1,4 +1,4 @@
-package ksh.mjc.mjclibrary;
+package ksh.mjc.mjclibrary.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
+
+import ksh.mjc.mjclibrary.DTO.Student;
+import ksh.mjc.mjclibrary.R;
 
 public class ListViewAdapter extends ArrayAdapter<Student> {
     Context context;
