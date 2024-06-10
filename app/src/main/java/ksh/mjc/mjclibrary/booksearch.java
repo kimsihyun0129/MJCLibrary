@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,7 +44,7 @@ public class booksearch extends AppCompatActivity {
     BooklistAdapter booklistAdapter;
     List<String> book;
     String Book_search;
-    ArrayList<Integer> Book_location = new ArrayList<>();
+   int Book_location;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +81,8 @@ public class booksearch extends AppCompatActivity {
                             for (int i = 0; i < bookname.length(); i++) {
                                 if(Book_search.equals(bookname.getString(i))){
                                     bookdatalist.add(new Bookdata(bookname.getString(i),bookauthor.getString(i),bookpublisher.getString(i),bookcode.getString(i),img[i]));
-                                    Book_location.add(bookloca.getInt(i));
+                                    Book_location = bookloca.getInt(i);
+
                                 }
                             }  booklistAdapter.notifyDataSetChanged();
 
@@ -98,9 +100,11 @@ public class booksearch extends AppCompatActivity {
                 bookrv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d("확인",String.valueOf(Book_location));
                         Intent intent = new Intent(getApplicationContext(), library.class);
                         intent.putExtra("location", Book_location);
                         startActivity(intent);
+
                     }
                 });
 
