@@ -132,6 +132,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             timelines[startTime.get(i)-9].setBackgroundColor(context.getResources().getColor(R.color.reserved));
                             timelines[endTime.get(i)-10].setBackgroundColor(context.getResources().getColor(R.color.reserved));
                         }
+
+                        // 현재 날짜를 yyyy-MM-dd 형식으로 가져오기
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        String currentDate = sdf.format(new Date());
+
+                        // 현재 시간 변수
+                        int currentHour = -1;
+
+                        // selectedDate가 현재 날짜인지 확인
+                        if (selectedDate.equals(currentDate)) {
+                            // 현재 시간을 가져오기
+                            Calendar calendar = Calendar.getInstance();
+                            currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                            // 현재시간을 기준으로 사용불가시간 초기화
+                            for(int i=0; i<currentHour-8 && i<timelines.length; i++) {
+                                timelines[i].setBackgroundColor(context.getResources().getColor(R.color.unAvailable));
+                            }
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -141,24 +159,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ReservationStatusRequest reservationStatusRequest = new ReservationStatusRequest(selectedDate, studyRoom.studyRoomName, responseListener);
             RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
             queue.add(reservationStatusRequest);
-
-            // 현재 날짜를 yyyy-MM-dd 형식으로 가져오기
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String currentDate = sdf.format(new Date());
-
-            // 현재 시간 변수
-            int currentHour = -1;
-
-            // selectedDate가 현재 날짜인지 확인
-            if (selectedDate.equals(currentDate)) {
-                // 현재 시간을 가져오기
-                Calendar calendar = Calendar.getInstance();
-                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-                // 현재시간을 기준으로 사용불가시간 초기화
-                for(int i=0; i<currentHour-8 && i<timelines.length; i++) {
-                    timelines[i].setBackgroundColor(context.getResources().getColor(R.color.unAvailable));
-                }
-            }
         }
     }
 }
