@@ -91,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.log_out) {
                     menuItem.setChecked(true);
                     drawerLayout.closeDrawers();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                     return true;
                 }
 
