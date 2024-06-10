@@ -46,7 +46,6 @@ public class StudyRoomReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_study_room_reservation);
 
         loginDTO = (Login)getIntent().getSerializableExtra("loginDTO");
-        Log.d("ddd",String.valueOf(loginDTO.getStudentNumber()));
 
         //툴바 달기
         Toolbar toolbar = findViewById(R.id.toolbar);
