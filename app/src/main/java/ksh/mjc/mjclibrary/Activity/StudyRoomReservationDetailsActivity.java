@@ -65,7 +65,7 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_study_room_reservation_details);
 
         loginDTO = (Login)getIntent().getSerializableExtra("loginDTO");
-
+A
         //각각의 뷰 인플레이팅
         ibBack = findViewById(R.id.ibBack);
         ibSelectDate = findViewById(R.id.ibSelectDate);
