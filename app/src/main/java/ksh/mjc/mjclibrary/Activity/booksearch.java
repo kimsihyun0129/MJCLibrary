@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ksh.mjc.mjclibrary.Request.BookRequeste;
+import ksh.mjc.mjclibrary.Request.BookRequest;
 import ksh.mjc.mjclibrary.DTO.Bookdata;
 import ksh.mjc.mjclibrary.Adapter.BooklistAdapter;
 import ksh.mjc.mjclibrary.R;
@@ -90,7 +90,7 @@ public class booksearch extends AppCompatActivity {
                         }
                     }
                 };
-                BookRequeste bookRequeste = new BookRequeste(responseListener);
+                BookRequest bookRequeste = new BookRequest(responseListener);
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 queue.add(bookRequeste);
 
@@ -130,7 +130,7 @@ public class booksearch extends AppCompatActivity {
                 }
             }
         };
-        BookRequeste bookRequeste = new BookRequeste(responseListener);
+        BookRequest bookRequeste = new BookRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(bookRequeste);
 

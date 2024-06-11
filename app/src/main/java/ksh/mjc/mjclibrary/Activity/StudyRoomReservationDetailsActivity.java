@@ -288,6 +288,7 @@ public class StudyRoomReservationDetailsActivity extends AppCompatActivity {
                             dialog.dismiss();
                             Toast.makeText(getApplicationContext(),"예약이 완료되었습니다.",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("loginDTO", loginDTO);
                             startActivity(intent);
                         }
                     });
